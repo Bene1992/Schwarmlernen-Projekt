@@ -6,8 +6,8 @@ app.config(function ($routeProvider) {
         .when('/',
             {
                 controller: 'easyController',
-                templateUrl: '/Users/admin/Desktop/Studium/7. Semester/Schwarmlernen Projekt/app/partials/view1.html'
+                templateUrl: 'app/partials/view1.html'
             })
        
-        .otherwise({ redirectTo: '/Users/admin/Desktop/Studium/7. Semester/Schwarmlernen Projekt/app/partials/view1.html' });
+        .otherwise({ redirectTo: 'app/partials/view1.html' });
 });
