@@ -1,7 +1,7 @@
 var app = angular.module('slApp', ['ngRoute']);
 
 //This configures the routes and associates each route with a view and a controller
-app.config(function ($routeProvider) {
+app.config(['$routeProvider',function ($routeProvider) {
     $routeProvider
         .when('/',
             {
@@ -10,4 +10,4 @@ app.config(function ($routeProvider) {
             })
        
         .otherwise({ redirectTo: 'app/partials/view1.html' });
-});
+}]);
