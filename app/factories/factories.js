@@ -1,4 +1,4 @@
-var app = angular.module('slApp', []);
+var app = angular.module('slApp', ['ngRoute']);
 
 app.factory('factory1', function(){
 	var Aufgabe = "Aufgabe1";
