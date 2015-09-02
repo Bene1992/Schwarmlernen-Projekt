@@ -4,14 +4,34 @@ var app = angular.module('slApp');
 app.service('Api', ['$http', function($http) {
 
 
-	this.getTargets=  function(){
-		$http.get('http://maximumstock.net/schwarmlernen/api/v1/targets')
-		.success(function (response) {
-			return response;
-		})
+	this.getAllTargets=  function(){
+			return $http.get('http://maximumstock.net/schwarmlernen/api/v1/targets')
+			.then(function (res){
+					return res.data
+				});
+	}
+	
+	this.getAllDegrees=  function(){
+			return $http.get('http://maximumstock.net/schwarmlernen/api/v1/degrees')
+				.then(function (res){
+					return res.data
+				});
 	}
 
+	this.getDegreeBy=  function(uuid){
+			return $http.get('http://maximumstock.net/schwarmlernen/api/v1/degrees/'+uuid)
+			.then(function (res){
+				return res.data
+			});
+	}
 
+	this.getTargetsByRef=  function(link){
+			console.log(link);
+			return $http.get(link)
+			.then(function (res){
+				return res.data
+			});
+	}
 
 
 

@@ -1,7 +1,13 @@
 <div>
-	Hallo
+	
 	<div ng-controller="easyController">
-		<div >{{Targets}}</div>
+		Name</br>
+		<div >{{Degree}}</div></br>
+		Ref</br>
+		<div ng-model="Ref">{{Ref}}</div></br>
+		
+		<div ng-repeat="Target in Targets" >{{Target.properties.uuid}}</div>
+		
 	</div>
 	
 </div>
