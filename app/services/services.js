@@ -26,7 +26,6 @@ app.service('Api', ['$http', function($http) {
 	}
 
 	this.getTargetsByRef=  function(link){
-			console.log(link);
 			return $http.get(link)
 			.then(function (res){
 				return res.data
