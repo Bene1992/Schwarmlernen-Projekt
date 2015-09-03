@@ -10,8 +10,23 @@ app.config(['$routeProvider',function ($routeProvider) {
             })
         .when('/Lernziele',
             {
-                controller: 'easyController',
+                controller: 'LernzielController',
                 templateUrl: 'app/partials/Lernziele.html'
+            })
+        .when('/Konto',
+            {
+                controller: '',
+                templateUrl: 'app/partials/Konto.html'
+            })
+        .when('/ToDo',
+            {
+                controller: '',
+                templateUrl: 'app/partials/ToDo.html'
+            })
+        .when('/Abmelden',
+            {
+                controller: '',
+                templateUrl: 'app/partials/Abmelden.html'
             })
        
         .otherwise({ redirectTo: 'app/partials/Startseite.html' });
