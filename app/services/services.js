@@ -33,18 +33,11 @@ app.service('Api', ['$http', function($http) {
 	}
 	
 	this.postNode= function(msg){ 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/targets', {msg:msg})
+		$http.post('http://maximumstock.net/schwarmlernen/api/v1/targets',msg)
 		.then(function(response) {
 			return response
   		});
   	}
-
-
-
-
-
-
-
 
 }]);
 
