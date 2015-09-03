@@ -1,6 +1,6 @@
 var app = angular.module('slApp');
 
-app.controller('LernzielController',['$scope','$http','Api', function ($scope,$http, Api) {
+app.controller('LernzielController',['$scope','Api', function ($scope, Api) {
     
     //Erstes Listen Element
     $('#listTargets').append("<ul class='list-group ' id= 'root'></ul>");

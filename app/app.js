@@ -5,7 +5,7 @@ app.config(['$routeProvider',function ($routeProvider) {
     $routeProvider
         .when('/Startseite',
             {
-                controller: '',
+                controller: 'StartseiteController',
                 templateUrl: 'app/partials/Startseite.html'
             })
         .when('/Lernziele',
@@ -15,17 +15,17 @@ app.config(['$routeProvider',function ($routeProvider) {
             })
         .when('/Konto',
             {
-                controller: '',
+                controller: 'KontoController',
                 templateUrl: 'app/partials/Konto.html'
             })
         .when('/ToDo',
             {
-                controller: '',
+                controller: 'ToDoController',
                 templateUrl: 'app/partials/ToDo.html'
             })
         .when('/Abmelden',
             {
-                controller: '',
+                controller: 'AbmeldenController',
                 templateUrl: 'app/partials/Abmelden.html'
             })
        
