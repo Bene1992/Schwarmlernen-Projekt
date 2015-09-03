@@ -28,6 +28,16 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'AbmeldenController',
                 templateUrl: 'app/partials/Abmelden.html'
             })
+        .when('/addToTask:uuid*',
+            {
+                controller: 'AddToTaskController',
+                templateUrl: 'app/partials/AddToTask.html'
+            })
+        .when('/addToNode:uuid*',
+            {
+                controller: 'AddToNodeController',
+                templateUrl: 'app/partials/AddToNode.html'
+            })
        
         .otherwise({ redirectTo: 'app/partials/Startseite.html' });
 }]);
