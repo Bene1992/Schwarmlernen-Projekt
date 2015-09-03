@@ -20,8 +20,7 @@ app.controller('AddToNodeController',['$scope','Api','$routeParams', function ($
     	    $('#submit').off('click');
     	    $('#formular').append('Node');
     	    $('#submit').click(function () {
-				var name = $('#name').val();
-				msg= "name:"+name+", parent:"+parentID;
+				msg= {"name":$('#name').val(),"parent":parentID};
 				console.log(msg);
 				Api.postNode(msg);
 			});
