@@ -38,6 +38,11 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'AddToNodeController',
                 templateUrl: 'app/partials/AddToNode.html'
             })
+        .when('/User',
+            {
+                controller: 'UserController',
+                templateUrl: 'app/partials/User.html'
+            })
        
         .otherwise({ redirectTo: 'app/partials/Startseite.html' });
 }]);

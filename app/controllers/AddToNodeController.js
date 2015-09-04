@@ -17,34 +17,37 @@ app.controller('AddToNodeController',['$scope','Api','$routeParams', function ($
 		//Verschiedne Formulare
 		switch(selectedType) {
     	case '1': // Node
+    		$('.formularbauteil').remove();
+    	    $('#formular').append('<input class="formularbauteil" id="name" type="text" class="form-control" placeholder="Name" ></input>');
     	    $('#submit').off('click');
-    	    $('#formular').append('Node');
     	    $('#submit').click(function () {
 				msg= {"name":$('#name').val(),"parent":parentID};
-				console.log(msg);
 				Api.postNode(msg);
 			});
     	    
     	    break;
     	case '2': // Aufgabe
+    		$('.formularbauteil').remove();
+    		$('#formular').append('<input class="formularbauteil" id="description" type="text" class="form-control" placeholder="Aufgabenstellung" ></input>');
     	    $('#submit').off('click');
-    	    $('#formular').append('Aufgabe');
+    	    $('#submit').click(function () {
+				msg= {"description":$('#description').val(),"parent":parentID};
+				console.log(Api.postTask(msg));
+			});
     	    
     	    break;
     	case '3': // Info
     	    $('#submit').off('click');
-    	    $('#formular').append('Info');
     	    
     	    break;
     	case '4': // Kommentar
-    	    $('#submit').off('click');
-    	    $('#formular').append('Kommentar');
+    	    $('#submit').off('click');s
     	    
     	    break;
     
 		}
 	
-	});
+});
 	
 	
 

@@ -13,18 +13,37 @@ app.controller('LernzielController',['$scope','Api', function ($scope, Api) {
   			Api.getTargetsByRef("http://maximumstock.net/schwarmlernen/api/v1/targets/"+this.id+"/children")
 			.then (function(children) {
 			console.log(children);
+			//hängt targets an
 			jQuery.each(children.targets, function() {
        			$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item ' id = 'no-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn-default' id = '"+this.properties.uuid+"'>Open</button>");
        			$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn-default' id = 'addToNode"+this.properties.uuid+"'>Add</button>");
-       			$('#no-li'+this.properties.uuid).append("<button  class='alterbutton btn-default' id = 'alterTo"+this.properties.uuid+"'>Alter</button>");
+       			$('#no-li'+this.properties.uuid).append("<button  class='alterbutton btn-default' id = 'alterNode"+this.properties.uuid+"'>Alter</button>");
    			})
-   			//$( ".openbutton" ).click(getChildrenOnClick);
+   			//Hängt tasks an 
    			jQuery.each(children.tasks, function() {
        			$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
-       			$('#ta-li'+this.properties.uuid).append("<button  class='openbutton btn-default' id = '"+this.properties.uuid+"'>Open</button>");
        			$('#ta-li'+this.properties.uuid).append("<button  class='addbutton btn-default' id = 'addToTask"+this.properties.uuid+"'>Add</button>");
-       			$('#ta-li'+this.properties.uuid).append("<button  class='alterbutton btn-default' id = 'alterTo"+this.properties.uuid+"'>Alter</button>");
+       			$('#ta-li'+this.properties.uuid).append("<button  class='alterbutton btn-default' id = 'alterTask"+this.properties.uuid+"'>Alter</button>");
+       			
+       			//hängt Solutions an Tasks
+       			var parentTask = "ul"+this.properties.uuid;
+       			Api.getSolutionsByRef("http://maximumstock.net/schwarmlernen/api/v1/solutions/"+this.properties.uuid+"/task")
+				.then (function(solutions) {
+					console.log(solutions);
+					jQuery.each(children.tasks, function() {
+						$('#'+parentTask).append("<li style='background-color:FFBF00' class='list-group-item ' id = 'so-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li>");
+						$('#so-li'+this.properties.uuid).append("<button  class='addbutton btn-default' id = 'addToSol"+this.properties.uuid+"'>Add</button>");
+       					$('#so-li'+this.properties.uuid).append("<button  class='alterbutton btn-default' id = 'alterSol"+this.properties.uuid+"'>Alter</button>");
+					})				
+				})
+   			})
+   			
+   			 //Hängt infos an 
+   			jQuery.each(children.infos, function() {
+       			$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			$('#in-li'+this.properties.uuid).append("<button  class='addbutton btn-default' id = 'addToInfo"+this.properties.uuid+"'>Add</button>");
+       			$('#in-li'+this.properties.uuid).append("<button  class='alterbutton btn-default' id = 'alterInfo"+this.properties.uuid+"'>Alter</button>");
    			})
    			$('.openbutton').click(getChildrenOnClick);
    			//Leitet auf die AddTo*.hmtl weiter

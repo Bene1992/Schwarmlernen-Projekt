@@ -36,11 +36,61 @@ app.service('Api', ['$http', function($http) {
 		$http.post('http://maximumstock.net/schwarmlernen/api/v1/targets',msg)
 		.then(function(response) {
 			return response
+  		},function(response) {
+			console.log(response.data);
   		});
   	}
-
+  	
+  	this.postTask= function(msg){
+  		console.log(msg); 
+		$http.post('http://maximumstock.net/schwarmlernen/api/v1/tasks',msg)
+		.then(function(response) {
+			console.log(response);
+			return response
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.postTask= function(msg){
+  		console.log(msg); 
+		$http.post('http://maximumstock.net/schwarmlernen/api/v1/tasks',msg)
+		.then(function(response) {
+			console.log(response);
+			return response
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	//Request an Child Solutions von Task
+  	this.getSolutionsByRef=  function(link){
+			return $http.get(link)
+			.then(function (res){
+				return res.data
+			});
+	}
+	
+	//Create new user
+	this.createUser= function(msg){ 
+		$http.post('http://maximumstock.net/schwarmlernen/api/v1/users',msg)
+		.then(function(response) {
+			console.log(response);
+			return response
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	//Get all Users
+  	this.getAllUsers=  function(){
+			return $http.get('http://maximumstock.net/schwarmlernen/api/v1/users')
+			.then(function (res){
+				return res.data
+			});
+	}
+  	
+  	
+  	
+  	
 }]);
-
-
-
-//http://maximumstock.net/schwarmlernen/api/v1
