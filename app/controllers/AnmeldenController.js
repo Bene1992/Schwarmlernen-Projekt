@@ -7,10 +7,8 @@ app.controller('AnmeldenController',['$scope','Api', function ($scope, Api) {
 	$('#submit').click( function(){
 		msg= {"username":$('#username').val(),"password":$('#password').val()};
 	
-		Api.getUserToken(msg)
-		.then (function(token) {
-			console.log(token);
-		})
+		Api.saveUserToken(msg);
+		
 	})
 
 }]);

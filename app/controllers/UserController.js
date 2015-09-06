@@ -5,14 +5,13 @@ app.controller('UserController',['$scope','Api','$routeParams', function ($scope
 	Api.getAllUsers()
 	.then(function(users){
 		jQuery.each(users,function () {
-			console.log("1");
-			$('#userlist').append("<li style='background-color:grey' class='list-group-item ' >"+this.properties.uuid+"</li>");
+			$('#userlist').append("<li style='background-color:grey' class='list-group-item ' >"+this.properties.username+"</li>");
 		})
 	})
 	
 	
 	$('#submit').click( function(){
-		msg= {"username":$('#username').val()};
+		msg= {"username":$('#username').val(),"password":$('#password').val()};
 		console.log(msg);
 		Api.createUser(msg);
 	})

@@ -1,6 +1,6 @@
 var app = angular.module('slApp');
 
-app.controller('AddToTargetController',['$scope','Api','$routeParams', function ($scope, Api,$routeParams) {	
+app.controller('AddToNodeController',['$scope','Api','$routeParams', function ($scope, Api,$routeParams) {	
 
 	var parentID = $routeParams.uuid;
 	var selectedType = $('#typeselect').val();
@@ -22,7 +22,7 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams', function 
     	    $('#submit').off('click');
     	    $('#submit').click(function () {
 				msg= {"name":$('#name').val(),"parent":parentID};
-				Api.postTarget(msg);
+				console.log(Api.postTarget(msg));
 			});
     	    
     	    break;
@@ -37,11 +37,17 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams', function 
     	    
     	    break;
     	case '3': // Info
+    	    $('.formularbauteil').remove();
+    		$('#formular').append('<input class="formularbauteil" id="description" type="text" class="form-control" placeholder="Information" ></input>');
     	    $('#submit').off('click');
+    	    $('#submit').click(function () {
+				msg= {"description":$('#description').val(),"parent":parentID};
+				console.log(Api.postInfo(msg));
+			});
     	    
     	    break;
     	case '4': // Kommentar
-    	    $('#submit').off('click');s
+    	    $('#submit').off('click');
     	    
     	    break;
     

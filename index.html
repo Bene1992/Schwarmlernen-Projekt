@@ -27,17 +27,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/sl/#/Lernziele">Lernziele <span class="sr-only">(current)</span></a></li>
-        <li><a href="/sl/#/User">User</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mein Konto <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mein Konto <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/sl/#/Konto">Kontostand</a></li>
             <li><a href="/sl/#/ToDo">ToDo</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/sl/#/Abmelden">Abmelden</a></li>
+            <li><a href="/sl/#/User">Registrieren</a></li>
             <li><a href="/sl/#/Login">Login</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/sl/#/Abmelden">Abmelden</a></li>
+            
           </ul>
         </li>
       </ul>
@@ -65,15 +67,19 @@
 
     <!-- App libs -->
     <script src="app/app.js"></script>
+    
     <script src="app/controllers/LernzielController.js"></script>
     <script src="app/controllers/KontoController.js"></script>
     <script src="app/controllers/ToDoController.js"></script>
     <script src="app/controllers/StartseiteController.js"></script>
     <script src="app/controllers/AbmeldenController.js"></script>
     <script src="app/controllers/AnmeldenController.js"></script>
-    <script src="app/controllers/AddToTaskController.js"></script>
-    <script src="app/controllers/AddToTargetController.js"></script>
+    <script src="app/controllers/AddToNodeController.js"></script>
     <script src="app/controllers/UserController.js"></script>
+    <script src="app/controllers/TaskViewController.js"></script>
+    <script src="app/controllers/SolutionViewController.js"></script>
+    <script src="app/controllers/InfoViewController.js"></script>
+    
     <script src="app/services/services.js"></script>
 </body>
 

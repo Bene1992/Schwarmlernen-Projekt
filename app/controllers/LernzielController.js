@@ -23,26 +23,26 @@ app.controller('LernzielController',['$scope','Api', function ($scope, Api) {
    			
    			//Hängt tasks an 
    			jQuery.each(children.tasks, function() {
-       			$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><a href='/sl/#/task/"+this.properties.uuid+"'>"+this.properties.uuid+"</a></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#ta-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTask"+this.properties.uuid+"'>Add</button>");
        			$('#ta-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alterTask"+this.properties.uuid+"'>Alter</button>");
        			console.log(this);
+       			
        			//hängt Solutions an Tasks
        			var parentTask = "ul"+this.properties.uuid;
-       			Api.getSolutionsByRef(this.solutions)
-				.then (function(solutions) {
-					console.log(solutions);
-					jQuery.each(children.tasks, function() {
-						$('#'+parentTask).append("<li style='background-color:FFBF00' class='list-group-item ' id = 'so-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li>");
+       			Api.getSolutionsByRef(this.links.solutions)
+				.then (function(sol) {
+					console.log(sol);
+					jQuery.each(sol, function() {
+						$('#'+parentTask).append("<li style='background-color:FFBF00' class='list-group-item ' id = 'so-li"+this.properties.uuid+"' ><a href='/sl/#/solution/"+this.properties.uuid+"'>"+this.properties.uuid+"</a></li>");
 						$('#so-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToSol"+this.properties.uuid+"'>Add</button>");
-       					$('#so-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alterSol"+this.properties.uuid+"'>Alter</button>");
 					})				
 				})
    			})
    			
    			 //Hängt infos an 
    			jQuery.each(children.infos, function() {
-       			$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' ><a href='/sl/#/info/"+this.properties.uuid+"'>"+this.properties.uuid+"</a></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#in-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToInfo"+this.properties.uuid+"'>Add</button>");
        			$('#in-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alterInfo"+this.properties.uuid+"'>Alter</button>");
        			
