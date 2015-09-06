@@ -33,15 +33,20 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'AddToTaskController',
                 templateUrl: 'app/partials/AddToTask.html'
             })
-        .when('/addToNode:uuid*',
+        .when('/addToTarget:uuid*',
             {
-                controller: 'AddToNodeController',
-                templateUrl: 'app/partials/AddToNode.html'
+                controller: 'AddToTargetController',
+                templateUrl: 'app/partials/AddToTarget.html'
             })
         .when('/User',
             {
                 controller: 'UserController',
                 templateUrl: 'app/partials/User.html'
+            })
+        .when('/Login',
+            {
+                controller: 'AnmeldenController',
+                templateUrl: 'app/partials/Anmelden.html'
             })
        
         .otherwise({ redirectTo: 'app/partials/Startseite.html' });

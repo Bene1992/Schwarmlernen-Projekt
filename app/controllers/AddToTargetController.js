@@ -1,6 +1,6 @@
 var app = angular.module('slApp');
 
-app.controller('AddToNodeController',['$scope','Api','$routeParams', function ($scope, Api,$routeParams) {	
+app.controller('AddToTargetController',['$scope','Api','$routeParams', function ($scope, Api,$routeParams) {	
 
 	var parentID = $routeParams.uuid;
 	var selectedType = $('#typeselect').val();
@@ -22,7 +22,7 @@ app.controller('AddToNodeController',['$scope','Api','$routeParams', function ($
     	    $('#submit').off('click');
     	    $('#submit').click(function () {
 				msg= {"name":$('#name').val(),"parent":parentID};
-				Api.postNode(msg);
+				Api.postTarget(msg);
 			});
     	    
     	    break;
