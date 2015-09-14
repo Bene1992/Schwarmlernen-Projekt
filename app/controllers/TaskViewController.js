@@ -4,7 +4,6 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-	console.log(isAdmin);
 		
 	if(isAdmin=='false'){
 		$('.adminonly').remove();
@@ -12,28 +11,71 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 	
 	var uuid = $routeParams.uuid;
 	
+	$("#rating").rating();
+	
+	
+	
+	$('#rating').on('rating.change', function(event, value, caption) {
+   		msg= {"rating":parseInt(value)};
+   		Api.postRatingOfTask(uuid,msg)
+   		.then(function(){
+   		   	location.reload();
+   		})
+
+	});
+	
 	
 	
 	Api.getNodesByRef('http://maximumstock.net/schwarmlernen/api/v1/tasks/'+uuid)
 	.then (function(task) {
-		console.log(task)
-		$('#head').append("of "+task.properties.description);
-       	$('#TaskView').append("<button  class='addbutton btn btn-default' id = 'addToTask"+task.properties.uuid+"'>Add</button>");
-       	$('#TaskView').append("<button  class='alterbutton btn btn-default' id = 'alter"+task.properties.uuid+"'>Alter</button>");
-       	console.log(this);
+		$('#head').append(task.properties.description);
+		Api.getRatingOfTask(uuid)
+		.then(function(rating){
+			$('#head').append(" bewertet mit "+rating.rating+" von 5 Sternen bei "+rating.votes+" Bewertungen");
+		})
        			
        	//hängt Solutions an Tasks
-       	Api.getSolutionsByRef(task.links.solutions)
+       	Api.getNodesByRef(task.links.solutions)
 		.then (function(sol) {
-			console.log(sol);
 			jQuery.each(sol, function() {
 				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+this.properties.uuid+"' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></li>");
-			})				
+			})
+			$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputSolution' type='text' class='form-control' placeholder='Loesung' ></textarea><button  class='btn btn-default' id = 'addSolution'>Add</button>");
+			$('#addSolution').click(addSolution);				
 		})
-		//Leitet auf die AddTo*.hmtl weiter
-		$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
-   		//Leitet auf die AlterTo*.html weiter
-   		$('.alterbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});	
+
+		
+		
+		Api.getNodesByRef(task.links.comments)
+		.then (function(com) {
+			jQuery.each(com, function() {
+				$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+this.properties.uuid+"' >"+this.properties.comment+"</li>");
+			})
+			$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputComment' type='text' class='form-control' placeholder='Kommentar' ></textarea><button  class='btn btn-default' id = 'addComment'>Add</button>");				
+			$('#addComment').click(addComment);
+		})
+
+
+		
+   	
+    	var addComment = function (){
+				msg= {"comment":$('#inputComment').val()};
+				Api.postCommentToTasks(msg,uuid)
+				.then(function(){
+				location.reload();
+				})
+				
+		}
+
+    	var addSolution = function (){    
+				msg= {"description":$('#inputSolution').val()};
+				console.log(msg);
+				Api.postSolution(msg,uuid)
+				.then(function(){
+				location.reload();
+				})
+    	}
+   			
    	})
    	
 
