@@ -1,6 +1,14 @@
 var app = angular.module('slApp');
 
-app.controller('LernzielController',['$scope','Api', function ($scope, Api) {
+app.controller('LernzielController',['$scope','Api','$cookies', function ($scope, Api,$cookies) {
+
+	//entfernt die Buttons fals kein Admin
+	var isAdmin = $cookies.get('isAdmin');
+	console.log(isAdmin);
+		
+	if(isAdmin=='false'){
+		$('.adminonly').remove();
+	}
     
     //Erstes Listen Element
     $('#listTargets').append("<ul class='list-group ' id= 'root'></ul>");
@@ -10,43 +18,40 @@ app.controller('LernzielController',['$scope','Api', function ($scope, Api) {
    		var parentID = this.id;
    			$( ".openbutton" ).off("click");
    			
-  			Api.getTargetsByRef("http://maximumstock.net/schwarmlernen/api/v1/targets/"+this.id+"/children")
+  			Api.getNodesByRef("http://maximumstock.net/schwarmlernen/api/v1/targets/"+this.id+"/children")
 			.then (function(children) {
 			console.log(children);
 			//hängt targets an
 			jQuery.each(children.targets, function() {
-       			$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item ' id = 'no-li"+this.properties.uuid+"' >"+this.properties.uuid+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item ' id = 'no-li"+this.properties.uuid+"' >"+this.properties.name+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Open</button>");
        			$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Add</button>");
-       			$('#no-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alterTarget"+this.properties.uuid+"'>Alter</button>");
+       			$('#no-li'+this.properties.uuid).append("<button  class='adminonly alterbutton btn btn-default' id = 'alter"+this.properties.uuid+"'>Alter</button>");
    			})
    			
    			//Hängt tasks an 
    			jQuery.each(children.tasks, function() {
-       			$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><a href='/sl/#/task/"+this.properties.uuid+"'>"+this.properties.uuid+"</a></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#ta-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTask"+this.properties.uuid+"'>Add</button>");
-       			$('#ta-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alterTask"+this.properties.uuid+"'>Alter</button>");
+       			$('#ta-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alter"+this.properties.uuid+"'>Alter</button>");
        			console.log(this);
        			
-       			//hängt Solutions an Tasks
-       			var parentTask = "ul"+this.properties.uuid;
-       			Api.getSolutionsByRef(this.links.solutions)
-				.then (function(sol) {
-					console.log(sol);
-					jQuery.each(sol, function() {
-						$('#'+parentTask).append("<li style='background-color:FFBF00' class='list-group-item ' id = 'so-li"+this.properties.uuid+"' ><a href='/sl/#/solution/"+this.properties.uuid+"'>"+this.properties.uuid+"</a></li>");
-						$('#so-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToSol"+this.properties.uuid+"'>Add</button>");
-					})				
-				})
+
    			})
    			
    			 //Hängt infos an 
    			jQuery.each(children.infos, function() {
-       			$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' ><a href='/sl/#/info/"+this.properties.uuid+"'>"+this.properties.uuid+"</a></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#in-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToInfo"+this.properties.uuid+"'>Add</button>");
-       			$('#in-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alterInfo"+this.properties.uuid+"'>Alter</button>");
+       			$('#in-li'+this.properties.uuid).append("<button  class='alterbutton btn btn-default' id = 'alter"+this.properties.uuid+"'>Alter</button>");
        			
    			})
+   			var isAdmin = $cookies.get('isAdmin');
+			console.log(isAdmin);
+		
+			if(isAdmin=='false'){
+				$('.adminonly').remove();
+			}
    			$('.openbutton').click(getChildrenOnClick);
    			//Leitet auf die AddTo*.hmtl weiter
    			$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
@@ -63,15 +68,19 @@ app.controller('LernzielController',['$scope','Api', function ($scope, Api) {
 		.then (function(data) {
 			console.log(data)
 			jQuery.each(data, function() {
-				$('#root').append("<li class='list-group-item' >"+this.properties.name+"</li><ul id = '"+this.properties.uuid+"'></ul>");
+				$('#root').append("<li id = 'de-li"+this.properties.uuid+"' class='list-group-item' >"+this.properties.name+"</li><ul id = '"+this.properties.uuid+"'></ul>");
+				$('#de-li'+this.properties.uuid).append("<button  class='adminonly addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Add</button>");
 				var parentID = this.properties.uuid;
-				Api.getTargetsByRef(this.links.targets)
+				Api.getNodesByRef(this.links.targets)
 				.then (function(data2) {
 					console.log(data2)
 					jQuery.each(data2, function() {
-       					$('#'+parentID).append("<li  class='list-group-item ' id = 'no-li"+this.properties.uuid+"' >"+this.properties.uuid+"<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Open</button></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       					$('#'+parentID).append("<li  class='list-group-item ' id = 'no-li"+this.properties.uuid+"' >"+this.properties.name+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       					$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Open</button>");
+       					$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Add</button>");
    					})
    					$( ".openbutton" ).click(getChildrenOnClick);
+   					$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
 				})
 			})
 		})							

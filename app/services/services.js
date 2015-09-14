@@ -42,7 +42,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   		});
 	}
 
-	this.getTargetsByRef=  function(link){
+	this.getNodesByRef=  function(link){
 		return $http.get(link)
 		.then(function (res){
 			return res.data
@@ -52,7 +52,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	}
 	
 	this.postTarget= function(msg){ 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/targets',msg)
+		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/targets',msg)
 		.then(function(response) {
 			return response
   		},function(response) {
@@ -62,18 +62,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   	
   	this.postTask= function(msg){
   		console.log(msg); 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/tasks',msg)
-		.then(function(response) {
-			console.log(response);
-			return response
-  		},function(response) {
-			console.log(response.data);
-  		});
-  	}
-  	
-  	this.postTask= function(msg){
-  		console.log(msg); 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/tasks',msg)
+		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/tasks',msg)
 		.then(function(response) {
 			console.log(response);
 			return response
@@ -84,7 +73,18 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   	
   	this.postInfo= function(msg){
   		console.log(msg); 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/infos',msg)
+		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/infos',msg)
+		.then(function(response) {
+			console.log(response);
+			return response
+  		},function(response) {
+			console.log(response);
+  		});
+  	}
+  	
+  	this.postSolution= function(msg){
+  		console.log(msg); 
+		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/solutions',msg)
 		.then(function(response) {
 			console.log(response);
 			return response
@@ -105,7 +105,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	
 	//Create new user
 	this.createUser= function(msg){ 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/register',msg)
+		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/register',msg)
 		.then(function(response) {
 			return response
   		},function(response) {
@@ -113,18 +113,22 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   		});
   	}
   	
+  	//Saves Hash of User in Cookies
   	this.saveUserToken= function(msg){ 
-		$http.post('http://maximumstock.net/schwarmlernen/api/v1/login',msg)
+		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/login',msg)
 		.then(function(response) {
 			console.log(response.data);
 			$cookies.put('X-Access-Token',response.data.token);
+			$cookies.put('isAdmin',response.data.admin);
 			alert("Angemeldet: "+response.data.success);
 			return response.data;
   		});
   	}
   	
+  	//Deletes Hash of User in Cookies
   	this.deleteUserToken= function(){ 
 		$cookies.remove('X-Access-Token');
+		$cookies.remove('isAdmin');
   	}
   	
   	//Get all Users
@@ -136,9 +140,6 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 			console.log(response.data);
   		});
 	}
-	
-	
-
   	
 }]);
 

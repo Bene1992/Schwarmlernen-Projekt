@@ -48,20 +48,25 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'AnmeldenController',
                 templateUrl: 'app/partials/Anmelden.html'
             })
-       	.when('/task/:uuid*',
+       	.when('/task:uuid*',
             {
                 controller: 'TaskViewController',
                 templateUrl: 'app/partials/TaskView.html'
             })
-        .when('/info/:uuid*',
+        .when('/info:uuid*',
             {
                 controller: 'InfoViewController',
                 templateUrl: 'app/partials/InfoView.html'
             })
-        .when('/solution/:uuid*',
+        .when('/solution:uuid*',
             {
                 controller: 'SolutionViewController',
                 templateUrl: 'app/partials/SolutionView.html'
+            })
+        .when('/alter:uuid*',
+            {
+                controller: 'AlterController',
+                templateUrl: 'app/partials/AlterView.html'
             })
         .otherwise({ redirectTo: 'app/partials/Startseite.html' });
 }]);
