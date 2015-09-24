@@ -101,7 +101,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	this.getNodesByRef=  function(link){
 		return $http.get(link)
 		.then(function (res){
-			return res.data
+			return res.data;
 		},function(response) {
 			console.log(response.data);
   		});
@@ -110,6 +110,26 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	this.postTarget= function(msg,uuid){ 
 		return $http.post("http://maximumstock.net/schwarmlernen/api/v1/targets/"+uuid+"/targets",msg)
 		.then(function(response) {
+			return response
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.postDegree= function(msg){ 
+		return $http.post("http://maximumstock.net/schwarmlernen/api/v1/degrees",msg)
+		.then(function(response) {
+			return response
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.postModul= function(msg,uuid){
+  		console.log(msg); 
+		return $http.post("http://maximumstock.net/schwarmlernen/api/v1/degrees/"+uuid+"/targets",msg)
+		.then(function(response) {
+			console.log(response);
 			return response
   		},function(response) {
 			console.log(response.data);
@@ -185,10 +205,10 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   	
 	
 	//Create new user
-	this.createUser= function(msg){ 
-		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/register',msg)
+	this.createUser= function(msg,uuid){ 
+		return $http.put("http://maximumstock.net/schwarmlernen/api/v1/degrees/"+uuid+"/users",msg)
 		.then(function(response) {
-			return response
+			return response.data
   		},function(response) {
 			console.log(response.data);
   		});

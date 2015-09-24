@@ -66,7 +66,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 			console.log(data)
 			jQuery.each(data, function() {
 				$('#root').append("<li id = 'de-li"+this.properties.uuid+"' class='list-group-item' >"+this.properties.name+"</li><ul id = '"+this.properties.uuid+"'></ul>");
-				$('#de-li'+this.properties.uuid).append("<button  class='adminonly addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Add</button>");
+				$('#de-li'+this.properties.uuid).append("<button  class='adminonly addbutton btn btn-default' id = 'addToDegree"+this.properties.uuid+"'>Add</button>");
 				var parentID = this.properties.uuid;
 				Api.getNodesByRef(this.links.targets)
 				.then (function(data2) {

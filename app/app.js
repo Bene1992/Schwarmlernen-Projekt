@@ -18,11 +18,6 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'KontoController',
                 templateUrl: 'app/partials/Konto.html'
             })
-        .when('/ToDo',
-            {
-                controller: 'ToDoController',
-                templateUrl: 'app/partials/ToDo.html'
-            })
         .when('/Abmelden',
             {
                 controller: 'AbmeldenController',
@@ -37,6 +32,16 @@ app.config(['$routeProvider',function ($routeProvider) {
             {
                 controller: 'AddToNodeController',
                 templateUrl: 'app/partials/AddToTarget.html'
+            })
+        .when('/addToDegree:uuid*',
+            {
+                controller: 'AddModulController',
+                templateUrl: 'app/partials/AddModul.html'
+            })
+        .when('/createUserFor:uuid*',
+            {
+                controller: 'AddUserController',
+                templateUrl: 'app/partials/AddUser.html'
             })
         .when('/User',
             {
@@ -67,6 +72,11 @@ app.config(['$routeProvider',function ($routeProvider) {
             {
                 controller: 'AlterController',
                 templateUrl: 'app/partials/AlterView.html'
+            })
+        .when('/Admin',
+            {
+                controller: 'AdminPanelController',
+                templateUrl: 'app/partials/AdminPanel.html'
             })
         .otherwise({ redirectTo: 'app/partials/Startseite.html' });
 }]);
