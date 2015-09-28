@@ -53,7 +53,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   		});
 	}
 	
-	this.postRatingOfTask=  function(uuid,msg){
+	this.postRatingOfTask=  function(msg,uuid){
 		return $http.post('http://maximumstock.net/schwarmlernen/api/v1/tasks/'+uuid+'/rating',msg)
 		.then(function (res){
 			console.log(res.data)
@@ -118,6 +118,15 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   	
   	this.postDegree= function(msg){ 
 		return $http.post("http://maximumstock.net/schwarmlernen/api/v1/degrees",msg)
+		.then(function(response) {
+			return response
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.getSelf= function(){ 
+		return $http.get("http://maximumstock.net/schwarmlernen/api/v1/self")
 		.then(function(response) {
 			return response
   		},function(response) {

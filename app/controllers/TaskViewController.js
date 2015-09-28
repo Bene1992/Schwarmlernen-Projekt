@@ -11,17 +11,22 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 	
 	var uuid = $routeParams.uuid;
 	
-	$("#rating").rating();
+	$("#rating1").rating();
+	$("#rating2").rating();
+	$("#rating3").rating();
+	$("#rating4").rating();
+	$("#rating5").rating();
 	
 	
 	
-	$('#rating').on('rating.change', function(event, value, caption) {
-   		msg= {"rating":parseInt(value)};
-   		Api.postRatingOfTask(uuid,msg)
-   		.then(function(){
-   		   	location.reload();
-   		})
-
+	$('#addRating').click(function() {
+   		msg= {"r1":parseInt($('#rating1').val()),"r2":parseInt($('#rating2').val()),"r3":parseInt($('#rating3').val()),"r4":parseInt($('#rating4').val()),"r5":parseInt($('#rating5').val()),"comment":$('#ratingKommi').val()};
+   		console.log(msg);
+   		console.log(uuid)
+		Api.postRatingOfTask(msg,uuid)
+		.then(function(res){
+			location.reload();
+		})	
 	});
 	
 	
@@ -31,7 +36,9 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 		$('#head').append(task.properties.description);
 		Api.getRatingOfTask(uuid)
 		.then(function(rating){
-			$('#head').append(" bewertet mit "+rating.rating+" von 5 Sternen bei "+rating.votes+" Bewertungen");
+			jQuery.each(rating.ratings, function() {
+				$('#ratingAllList').append("<li style='background-color:FFBF00' class='list-group-item '>"+this.author+"  r1:"+this.r1+",  r2:"+this.r2+","+"  r3:"+this.r3+",  r4:"+this.r4+",  r5:"+this.r5+",  Kommentar:"+this.comment+"  </li>");
+			})
 		})
        			
        	//hängt Solutions an Tasks
@@ -54,9 +61,6 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputComment' type='text' class='form-control' placeholder='Kommentar' ></textarea><button  class='btn btn-default' id = 'addComment'>Add</button>");				
 			$('#addComment').click(addComment);
 		})
-
-
-		
    	
     	var addComment = function (){
 				msg= {"comment":$('#inputComment').val()};

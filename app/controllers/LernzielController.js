@@ -43,12 +43,11 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 
        			
    			})
-   			var isAdmin = $cookies.get('isAdmin');
-			console.log(isAdmin);
 		
 			if(isAdmin=='false'){
 				$('.adminonly').remove();
 			}
+			$('.openbutton').off('click');
    			$('.openbutton').click(getChildrenOnClick);
    			//Leitet auf die AddTo*.hmtl weiter
    			$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
@@ -65,19 +64,22 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 		.then (function(data) {
 			console.log(data)
 			jQuery.each(data, function() {
-				$('#root').append("<li id = 'de-li"+this.properties.uuid+"' class='list-group-item' >"+this.properties.name+"</li><ul id = '"+this.properties.uuid+"'></ul>");
+				$('#root').append("<li id = 'de-li"+this.properties.uuid+"' class='list-group-item' ><textarea class='form-control' disabled='yes'>"+this.properties.name+"</textarea></li><ul id = '"+this.properties.uuid+"'></ul>");
 				$('#de-li'+this.properties.uuid).append("<button  class='adminonly addbutton btn btn-default' id = 'addToDegree"+this.properties.uuid+"'>Add</button>");
 				var parentID = this.properties.uuid;
 				Api.getNodesByRef(this.links.targets)
 				.then (function(data2) {
 					console.log(data2)
 					jQuery.each(data2, function() {
-       					$('#'+parentID).append("<li  class='list-group-item ' id = 'no-li"+this.properties.uuid+"' >"+this.properties.name+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       					$('#'+parentID).append("<li  class='list-group-item '  id = 'no-li"+this.properties.uuid+"' >"+this.properties.name+"</li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        					$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Open</button>");
        					$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Add</button>");
    					})
    					$( ".openbutton" ).click(getChildrenOnClick);
    					$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
+   					if(isAdmin=='false'){
+						$('.adminonly').remove();
+					}
 				})
 			})
 		})							
