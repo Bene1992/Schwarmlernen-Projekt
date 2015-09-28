@@ -5,7 +5,7 @@ app.controller('UserController',['$scope','Api','$routeParams','$cookies', funct
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
 		
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 

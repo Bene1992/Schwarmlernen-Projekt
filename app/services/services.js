@@ -97,9 +97,27 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 			console.log(response.data);
   		});
 	}
+	
+	this.postConfig=  function(uuid,msg){
+		return $http.put('http://maximumstock.net/schwarmlernen/api/v1/degrees/'+uuid+'/config',msg)
+		.then(function (res){
+			console.log(res.data)
+		},function(response) {
+			console.log(response.data);
+  		});
+	}
 
 	this.getNodesByRef=  function(link){
 		return $http.get(link)
+		.then(function (res){
+			return res.data;
+		},function(response) {
+			console.log(response.data);
+  		});
+	}
+	
+	this.getConfig=  function(uuid){
+		return $http.get("http://maximumstock.net/schwarmlernen/api/v1/degrees/"+uuid+"/config")
 		.then(function (res){
 			return res.data;
 		},function(response) {
@@ -212,10 +230,38 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   		});
   	}
   	
+  	
 	
 	//Create new user
 	this.createUser= function(msg,uuid){ 
 		return $http.put("http://maximumstock.net/schwarmlernen/api/v1/degrees/"+uuid+"/users",msg)
+		.then(function(response) {
+			return response.data
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.deleteTask= function(uuid){ 
+		return $http.put("http://maximumstock.net/schwarmlernen/api/v1/tasks/"+uuid+"/status")
+		.then(function(response) {
+			return response.data
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.deleteSolution= function(uuid){ 
+		return $http.put("http://maximumstock.net/schwarmlernen/api/v1/solutions/"+uuid+"/status")
+		.then(function(response) {
+			return response.data
+  		},function(response) {
+			console.log(response.data);
+  		});
+  	}
+  	
+  	this.deleteInfo= function(uuid){ 
+		return $http.put("http://maximumstock.net/schwarmlernen/api/v1/infos/"+uuid+"/status")
 		.then(function(response) {
 			return response.data
   		},function(response) {

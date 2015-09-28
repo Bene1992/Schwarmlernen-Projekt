@@ -5,7 +5,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
 		
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	

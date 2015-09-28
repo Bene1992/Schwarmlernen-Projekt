@@ -6,7 +6,7 @@ app.controller('StartseiteController',['$scope','Api','$cookies', function ($sco
 	var isAdmin = $cookies.get('isAdmin');
 	console.log(isAdmin);
 		
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 

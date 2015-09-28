@@ -5,7 +5,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
 		
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	
@@ -24,7 +24,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
    		console.log(uuid)
 		Api.postRatingOfInfo(uuid,msg)
 		.then(function(res){
-			//location.reload();
+			location.reload();
 		})	
 	});
 	

@@ -5,7 +5,7 @@ app.controller('SolutionViewController',['$scope','Api','$routeParams','$cookies
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
 		
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	
@@ -25,6 +25,7 @@ app.controller('SolutionViewController',['$scope','Api','$routeParams','$cookies
    		console.log(uuid)
 		Api.postRatingOfSolution(uuid,msg)
 		.then(function(res){
+			console.log(res)
 			location.reload();
 		})	
 	});

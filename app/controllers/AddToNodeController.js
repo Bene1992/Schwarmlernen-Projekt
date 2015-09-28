@@ -11,7 +11,7 @@ app.controller('AddToNodeController',['$scope','Api','$routeParams','$cookies', 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
 
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	
@@ -25,34 +25,34 @@ app.controller('AddToNodeController',['$scope','Api','$routeParams','$cookies', 
 		switch(selectedType) {
     	case '1': // Lernziel
     		$('.formularbauteil').remove();
-    	    $('#formular').append('<input class="formularbauteil" id="name" type="text" class="form-control" placeholder="Name" ></input>');
+    	    $('#formular').append('<input class="form-control formularbauteil" id="name" type="text" class="form-control" placeholder="Lernziel" ></input>');
     	    $('#submit').off('click');
     	    $('#submit').click(function () {
 				msg= {"name":$('#name').val()};
-				console.log(Api.postTarget(msg,parentID));
-				window.location = 'http://maximumstock.net/sl/#/Lernziele'
+				Api.postTarget(msg,parentID)
+					window.location = 'http://maximumstock.net/sl/#/Lernziele';
 			});
     	    
     	    break;
     	case '2': // Aufgabe
     		$('.formularbauteil').remove();
-    		$('#formular').append('<input class="formularbauteil" id="description" type="text" class="form-control" placeholder="Aufgabenstellung" ></input>');
+    		$('#formular').append('<input class="form-control formularbauteil" id="description" type="text" class="form-control" placeholder="Aufgabenstellung" ></input>');
     	    $('#submit').off('click');
     	    $('#submit').click(function () {
 				msg= {"description":$('#description').val()};
-				console.log(Api.postTask(msg,parentID));
-				window.location = 'http://maximumstock.net/sl/#/Lernziele'
+				Api.postTask(msg,parentID)
+					window.location = 'http://maximumstock.net/sl/#/Lernziele';
 			});
     	    
     	    break;
     	case '3': // Info
     	    $('.formularbauteil').remove();
-    		$('#formular').append('<input class="formularbauteil" id="description" type="text" class="form-control" placeholder="Information" ></input>');
+    		$('#formular').append('<input class="form-control formularbauteil" id="description" type="text" class="form-control" placeholder="Information" ></input>');
     	    $('#submit').off('click');
     	    $('#submit').click(function () {
 				msg= {"description":$('#description').val()};
-				console.log(Api.postInfo(msg,parentID));
-				window.location = 'http://maximumstock.net/sl/#/Lernziele'
+				Api.postInfo(msg,parentID)
+					window.location = 'http://maximumstock.net/sl/#/Lernziele';
 			});
     	    
     	    break;

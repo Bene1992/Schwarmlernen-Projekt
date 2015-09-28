@@ -6,7 +6,7 @@ app.controller('AbmeldenController',['$scope','Api','$cookies', function ($scope
 	var isAdmin = $cookies.get('isAdmin');
 	console.log(isAdmin);
 		
-	if(isAdmin=='false'){
+	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 
