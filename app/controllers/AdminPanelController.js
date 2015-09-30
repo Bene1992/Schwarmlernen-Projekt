@@ -4,11 +4,11 @@ app.controller('AdminPanelController',['$scope','Api','$routeParams','$cookies',
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	
+	//fügt Studiengänge zu Dropdown hinzu
 	Api.getAllDegrees()
 	.then(function(deg){
 		jQuery.each(deg,function(){
@@ -20,6 +20,8 @@ app.controller('AdminPanelController',['$scope','Api','$routeParams','$cookies',
 	var uuidDegree;
 	var uuidConfig;
 	
+	
+	//Zeigt Config Optionen an
 	var configview = function(){
 		uuidDegree=$('#degreeDropdown').val();
 		Api.getConfig(uuidDegree)
@@ -56,11 +58,13 @@ app.controller('AdminPanelController',['$scope','Api','$routeParams','$cookies',
 	
 	$('#degreeDropdown').change(configview);
 
+	//erstellt Studiengang
 	$('#submitStudiengang').click(function () {
 		msg= {"name":$('#addStudiengang').val()};
 		console.log(Api.postDegree(msg));
 	})
 	
+	//ändert Studiengangconfig
 	$('#submitConfig').click(function () {
 		msg= {	"infoCost":parseInt($('#infocost').val()),
 				"infoPoints": parseInt($('#infopoints').val()),

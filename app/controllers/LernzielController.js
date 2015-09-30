@@ -65,8 +65,8 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
    			$('.openbutton').click(getChildrenOnClick);
    			//Leitet auf die AddTo*.hmtl weiter
    			$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
-   			//Leitet auf die AlterTo*.html weiter
-   			//$('.alterbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
+   			
+   			//toggelt die Aufgaben   			
    			$('.in-delete').click(function(){
    				Api.deleteInfo(this.id)
    				.then(function(){
@@ -75,6 +75,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 
    			})
    			
+   			//toggelt die Aufgaben
    			$('.ta-delete').click(function(){
    				Api.deleteTask(this.id)
    				.then(function(){

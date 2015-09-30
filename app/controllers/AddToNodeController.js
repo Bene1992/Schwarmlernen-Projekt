@@ -10,7 +10,6 @@ app.controller('AddToNodeController',['$scope','Api','$routeParams','$cookies', 
 	
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}

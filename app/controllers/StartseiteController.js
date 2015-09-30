@@ -4,8 +4,6 @@ app.controller('StartseiteController',['$scope','Api','$cookies', function ($sco
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-	console.log(isAdmin);
-		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}

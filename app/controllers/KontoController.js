@@ -6,14 +6,15 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 
-	
+	//holt sich die self-Links
 	Api.getSelf()
 	.then( function (self){
+		
+		//holt sich das Arbeitspaket
 		Api.getNodesByRef(self.data.workpackage)
 		.then( function (workpackage){
 			if(isAdmin=='false'){
@@ -26,6 +27,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Kein Paket als Admin</li>");
 			}
 		})
+		
+		//holt sich das Punktekonto
 		Api.getNodesByRef(self.data.points)
 		.then( function (points){
 			console.log(points)
@@ -39,6 +42,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Total:<span class='form-control'> Erworben: "+points.total.gained+" Ausgegeben: "+points.total.spent+"</span></li>");
 			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Balance:<span class='form-control'> "+balance+"</span></li>");
 		})
+		
+		//holt dich die erstellten Infos
 		Api.getNodesByRef(self.data.infos)
 		.then( function (infos){
 			jQuery.each(infos,function () {
@@ -50,6 +55,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				}
 				//$('#in-li'+this.properties.uuid).append("<button  class=' in-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
 			})
+			
+			//toggelt Infos
 			$('.in-delete').click(function(){
    				Api.deleteInfo(this.id)
    				.then(function(){
@@ -57,6 +64,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
    				})
    			})
 		})
+		
+		//holt sich die Lösungen
 		Api.getNodesByRef(self.data.solutions)
 		.then( function (solutions){
 			jQuery.each(solutions,function () {
@@ -68,6 +77,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				}
 				//$('#so-li'+this.properties.uuid).append("<button  class=' so-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
 			})
+			
+			//toggelt die Lösungen
 			$('.so-delete').click(function(){
    				Api.deleteSolution(this.id)
    				.then(function(res){
@@ -76,6 +87,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
    				})
    			})
 		})
+		
+		//holt sich die erstellten Aufgaben
 		Api.getNodesByRef(self.data.tasks.created)
 		.then( function (created){
 			jQuery.each(created,function () {
@@ -87,6 +100,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				}
 				//$('#tac-li'+this.properties.uuid).append("<button  class=' ta-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
 			})
+			
+			//toggelt die Aufgaben
 			$('.ta-delete').click(function(){
    				Api.deleteTask(this.id)
    				.then(function(){
@@ -94,6 +109,8 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
    				})
    			})
 		})
+		
+		//holt sich die gelösten Aufgaben
 		Api.getNodesByRef(self.data.tasks.solved)
 		.then( function (solved){
 			jQuery.each(solved,function () {

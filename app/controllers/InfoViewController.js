@@ -4,11 +4,11 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	
+	//holt sich Info uuid aus URL
 	var uuid = $routeParams.uuid;
 	
 	$("#rating1").rating();
@@ -18,7 +18,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	$("#rating5").rating();
 	$("#ratingKommi").markItUp(mySettings);
 	
-	
+	//fügt Bewertung hinzu
 	$('#addRating').click(function() {
    		msg= {"r1":parseInt($('#rating1').val()),"r2":parseInt($('#rating2').val()),"r3":parseInt($('#rating3').val()),"r4":parseInt($('#rating4').val()),"r5":parseInt($('#rating5').val()),"comment":$('#ratingKommi').val()};
    		console.log(msg);
@@ -30,18 +30,20 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	});
 	
 	
-	
+	//holt sich die Info
 	Api.getNodesByRef('http://maximumstock.net/schwarmlernen/api/v1/infos/'+uuid)
 	.then (function(info) {
 		$('#head').append(info.properties.description);
 		
+		//holt sich die Bewertungen der Info
 		Api.getRatingOfInfo(uuid)
 		.then(function(rating){
 			jQuery.each(rating.ratings, function() {
 				$('#ratingAllList').append("<li style='background-color:FFBF00' class='list-group-item '>"+this.author+"  r1:"+this.r1+",  r2:"+this.r2+","+"  r3:"+this.r3+",  r4:"+this.r4+",  r5:"+this.r5+",  Kommentar:"+this.comment+"  </li>");
 			})
 		})
-
+		
+		//holt sich die Kommentare der Info
 		Api.getNodesByRef(info.links.comments)
 		.then (function(com) {
 			jQuery.each(com, function() {
@@ -54,7 +56,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 
 
 		
-   	
+   		//fügt Kommentar dazu
     	var addComment = function (){
 				msg= {"comment":$('#inputComment').val()};
 				Api.postCommentToInfos(msg,uuid)

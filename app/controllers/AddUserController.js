@@ -4,13 +4,14 @@ app.controller('AddUserController',['$scope','Api','$routeParams','$cookies', fu
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 
-		var uuid= $routeParams.uuid;
+	//holt sich uuid des Studiengangs zu dem User hinzugefügt werden sollen aus URL
+	var uuid= $routeParams.uuid;
 
+	//erzeugt User und zeigt Passwort mit Username 
 	$('#submit').click( function(){
 		var amount = parseInt($('#amount').val())
 		if (amount<100){

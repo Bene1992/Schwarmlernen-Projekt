@@ -5,11 +5,11 @@ app.controller('AbmeldenController',['$scope','Api','$cookies', function ($scope
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
 	console.log(isAdmin);
-		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 
+	//löscht Usertoken
 	Api.deleteUserToken()
 	.then(function(){
 		window.location = 'http://maximumstock.net/sl/#/Lernziele'

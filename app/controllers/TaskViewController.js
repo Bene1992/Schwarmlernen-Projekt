@@ -46,7 +46,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			}
 		})
        			
-       	//hängt Solutions an Tasks
+       	//holt Lösungen
        	Api.getNodesByRef(task.links.solutions)
 		.then (function(sol) {
 			jQuery.each(sol, function() {
@@ -58,7 +58,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 		})
 
 		
-		
+		//holt Kommentare
 		Api.getNodesByRef(task.links.comments)
 		.then (function(com) {
 			jQuery.each(com, function() {
@@ -69,22 +69,24 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			$("#inputComment").markItUp(mySettings);
 		})
    	
+   	
+   		//fügt Kommentare hinzu
     	var addComment = function (){
-				msg= {"comment":$('#inputComment').val()};
-				Api.postCommentToTasks(msg,uuid)
-				.then(function(){
-				location.reload();
-				})
-				
+			msg= {"comment":$('#inputComment').val()};
+			Api.postCommentToTasks(msg,uuid)
+			.then(function(){
+			location.reload();
+			})
 		}
 
+		//fügt Lösungen hinzu
     	var addSolution = function (){    
-				msg= {"description":$('#inputSolution').val()};
-				console.log(msg);
-				Api.postSolution(msg,uuid)
-				.then(function(){
-				location.reload();
-				})
+			msg= {"description":$('#inputSolution').val()};
+			console.log(msg);
+			Api.postSolution(msg,uuid)
+			.then(function(){
+			location.reload();
+			})
     	}
     	
    		
