@@ -4,7 +4,6 @@ app.controller('AnmeldenController',['$scope','Api','$cookies', function ($scope
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-	console.log(isAdmin);
 		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
@@ -15,7 +14,10 @@ app.controller('AnmeldenController',['$scope','Api','$cookies', function ($scope
 	$('#submit').click( function(){
 		msg= {"username":$('#username').val(),"password":$('#password').val()};
 	
-		Api.saveUserToken(msg);
+		Api.saveUserToken(msg)
+		.then(function(){
+			window.location = 'http://maximumstock.net/sl/#/Lernziele'
+		})
 		
 	})
 

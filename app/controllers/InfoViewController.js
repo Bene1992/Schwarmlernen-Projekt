@@ -16,6 +16,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	$("#rating3").rating();
 	$("#rating4").rating();
 	$("#rating5").rating();
+	$("#ratingKommi").markItUp(mySettings);
 	
 	
 	$('#addRating').click(function() {
@@ -48,6 +49,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 			})
 			$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputComment' type='text' class='form-control' placeholder='Kommentar' ></textarea><button  class='btn btn-default' id = 'addComment'>Add</button>");				
 			$('#addComment').click(addComment);
+			$("#inputComment").markItUp(mySettings);
 		})
 
 

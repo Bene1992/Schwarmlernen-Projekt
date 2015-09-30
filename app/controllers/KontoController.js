@@ -1,5 +1,7 @@
 var app = angular.module('slApp');
 
+//Username: kocuqur Passwort: davehum
+
 app.controller('KontoController',['$scope','Api','$routeParams','$cookies', function ($scope, Api,$routeParams,$cookies) {
 
 	//entfernt die Buttons fals kein Admin
@@ -9,7 +11,6 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		$('.adminonly').remove();
 	}
 
-	//Username: nibosog Passwort: wuqunok
 	
 	Api.getSelf()
 	.then( function (self){
@@ -47,7 +48,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				if(this.properties.status=="inactive"){
 					$('#selfinfos').append("<li id='in-li"+this.properties.uuid+"' style='background-color:red' class='list-group-item' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 				}
-				$('#in-li'+this.properties.uuid).append("<button  class=' in-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
+				//$('#in-li'+this.properties.uuid).append("<button  class=' in-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
 			})
 			$('.in-delete').click(function(){
    				Api.deleteInfo(this.id)
@@ -65,7 +66,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				if(this.properties.status=="inactive"){
 					$('#selfsolutions').append("<li id='so-li"+this.properties.uuid+"' style='background-color:red' class='list-group-item' ><span class='form-control' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 				}
-				$('#so-li'+this.properties.uuid).append("<button  class=' so-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
+				//$('#so-li'+this.properties.uuid).append("<button  class=' so-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
 			})
 			$('.so-delete').click(function(){
    				Api.deleteSolution(this.id)
@@ -84,7 +85,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 				if(this.properties.status=="inactive"){
 					$('#selfcreated').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:red' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 				}
-				$('#tac-li'+this.properties.uuid).append("<button  class=' ta-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
+				//$('#tac-li'+this.properties.uuid).append("<button  class=' ta-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
 			})
 			$('.ta-delete').click(function(){
    				Api.deleteTask(this.id)

@@ -4,11 +4,11 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 
 	//entfernt die Buttons fals kein Admin
 	var isAdmin = $cookies.get('isAdmin');
-		
 	if(isAdmin!='true'){
 		$('.adminonly').remove();
 	}
 	
+	//holt sich die uuid der Aufgabe aus Url
 	var uuid = $routeParams.uuid;
 	
 	$("#rating1").rating();
@@ -16,9 +16,11 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 	$("#rating3").rating();
 	$("#rating4").rating();
 	$("#rating5").rating();
+	$("#ratingKommi").markItUp(mySettings);
 	
 	
 	
+	// fügt Bewertung hinzu
 	$('#addRating').click(function() {
    		msg= {"r1":parseInt($('#rating1').val()),"r2":parseInt($('#rating2').val()),"r3":parseInt($('#rating3').val()),"r4":parseInt($('#rating4').val()),"r5":parseInt($('#rating5').val()),"comment":$('#ratingKommi').val()};
    		console.log(msg);
@@ -39,6 +41,9 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			jQuery.each(rating.ratings, function() {
 				$('#ratingAllList').append("<li style='background-color:FFBF00' class='list-group-item '>"+this.author+"  r1:"+this.r1+",  r2:"+this.r2+","+"  r3:"+this.r3+",  r4:"+this.r4+",  r5:"+this.r5+",  Kommentar:"+this.comment+"  </li>");
 			})
+			if(isAdmin!='true'){
+				$('.adminonly').remove();
+			}
 		})
        			
        	//hängt Solutions an Tasks
@@ -48,7 +53,8 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+this.properties.uuid+"' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></li>");
 			})
 			$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputSolution' type='text' class='form-control' placeholder='Loesung' ></textarea><button  class='btn btn-default' id = 'addSolution'>Add</button>");
-			$('#addSolution').click(addSolution);				
+			$('#addSolution').click(addSolution);
+			$("#inputSolution").markItUp(mySettings);
 		})
 
 		
@@ -60,6 +66,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			})
 			$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputComment' type='text' class='form-control' placeholder='Kommentar' ></textarea><button  class='btn btn-default' id = 'addComment'>Add</button>");				
 			$('#addComment').click(addComment);
+			$("#inputComment").markItUp(mySettings);
 		})
    	
     	var addComment = function (){
@@ -79,7 +86,8 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 				location.reload();
 				})
     	}
-   			
+    	
+   		
    	})
    	
 

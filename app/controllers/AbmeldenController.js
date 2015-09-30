@@ -10,6 +10,9 @@ app.controller('AbmeldenController',['$scope','Api','$cookies', function ($scope
 		$('.adminonly').remove();
 	}
 
-	Api.deleteUserToken();
+	Api.deleteUserToken()
+	.then(function(){
+		window.location = 'http://maximumstock.net/sl/#/Lernziele'
+	})
 
 }]);
