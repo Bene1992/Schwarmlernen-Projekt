@@ -13,107 +13,91 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 	//holt sich die self-Links
 	Api.getSelf()
 	.then( function (self){
-		
+		console.log(self)
 		//holt sich das Arbeitspaket
-		Api.getNodesByRef(self.data.workpackage)
-		.then( function (workpackage){
-			if(isAdmin=='false'){
+		if(isAdmin=='false'){
+			Api.getNodesByRef(self.data.workpackage)
+			.then( function (workpackage){
 				$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Infos:<span class='form-control'> zu erledigen: "+workpackage.infos.todo+" erledigt: "+workpackage.infos.done+"</span></li>");
 				$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Bewertungen:<span class='form-control'> zu erledigen: "+workpackage.ratings.todo+" erledigt: "+workpackage.ratings.done+"</span></li>");
 				$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Loesungen:<span class='form-control'> zu erledigen: "+workpackage.solutions.todo+" erledigt: "+workpackage.solutions.done+"</span></li>");
 				$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Aufgaben:<span class='form-control'> zu erledigen: "+workpackage.tasks.todo+" erledigt: "+workpackage.tasks.done+"</span></li>");
-			}
-			if(isAdmin=='true'){
-				$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Kein Paket als Admin</li>");
-			}
-		})
+			})
+		}
+		if(isAdmin=='true'){
+			$('#selfpackage').append("<li style='background-color:grey' class='list-group-item' >Kein Paket als Admin</li>");
+		}
 		
 		//holt sich das Punktekonto
 		Api.getNodesByRef(self.data.points)
 		.then( function (points){
-			console.log(points)
-			var spent =parseInt(points.total.spent);
-			var gained=parseInt(points.total.gained);
+			var spent =parseInt(points.data.spent);
+			var gained=parseInt(points.data.gained);
 			var balance = gained-spent;
-			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Infos:<span class='form-control'> Erworben: "+points.infos.gained+" Ausgegeben: "+points.infos.spent+"</span></li>");
-			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Bewertungen:<span class='form-control'> Erworben: "+points.ratings.gained+" Ausgegeben: "+points.ratings.spent+"</span></li>");
-			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Loesungen:<span class='form-control'> Erworben: "+points.solutions.gained+" Ausgegeben: "+points.solutions.spent+"</span></li>");
-			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Aufgaben:<span class='form-control'> Erworben: "+points.tasks.gained+" Ausgegeben: "+points.tasks.spent+"</span></li>");
-			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Total:<span class='form-control'> Erworben: "+points.total.gained+" Ausgegeben: "+points.total.spent+"</span></li>");
-			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' >Balance:<span class='form-control'> "+balance+"</span></li>");
+			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' ><span class='form-control'> Erworben: "+points.data.gained+" Ausgegeben: "+points.data.spent+"</span></li>");
+			$('#selfpoints').append("<li style='background-color:grey' class='list-group-item' ><span class='form-control'> Balance: "+balance+"</span></li>");
+		})
+		
+		//holt den aktuellen Ruf
+		Api.getNodesByRef(self.data.prestige)
+		.then( function (prestige){
+			console.log(prestige)	
+			$('#selfprestige').append("<li style='background-color:grey' class='list-group-item' ><span class='form-control' >"+prestige.data.prestige+"</span></li>");
 		})
 		
 		//holt dich die erstellten Infos
-		Api.getNodesByRef(self.data.infos)
+		Api.getNodesByRef(self.data.infos.finished)
 		.then( function (infos){
-			jQuery.each(infos,function () {
-				if(this.properties.status=="active"){
-					$('#selfinfos').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
-				}
-				if(this.properties.status=="inactive"){
-					$('#selfinfos').append("<li id='in-li"+this.properties.uuid+"' style='background-color:red' class='list-group-item' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
-				}
-				//$('#in-li'+this.properties.uuid).append("<button  class=' in-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
+			jQuery.each(infos.data,function () {
+				$('#selfinfos').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
-			
-			//toggelt Infos
-			$('.in-delete').click(function(){
-   				Api.deleteInfo(this.id)
-   				.then(function(){
-   				   	location.reload();
-   				})
-   			})
+		})
+		
+		//holt dich die erstellten Infos unfinished
+		Api.getNodesByRef(self.data.infos.unfinished)
+		.then( function (infos){
+			jQuery.each(infos.data,function () {
+				$('#selfinfosunfinished').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/unfinishedinfo"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+			})
 		})
 		
 		//holt sich die Lösungen
-		Api.getNodesByRef(self.data.solutions)
+		Api.getNodesByRef(self.data.solutions.finished)
 		.then( function (solutions){
-			jQuery.each(solutions,function () {
-				if(this.properties.status=="active"){
-					$('#selfsolutions').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
-				}
-				if(this.properties.status=="inactive"){
-					$('#selfsolutions').append("<li id='so-li"+this.properties.uuid+"' style='background-color:red' class='list-group-item' ><span class='form-control' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
-				}
-				//$('#so-li'+this.properties.uuid).append("<button  class=' so-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
+			jQuery.each(solutions.data,function () {
+				$('#selfsolutions').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
-			
-			//toggelt die Lösungen
-			$('.so-delete').click(function(){
-   				Api.deleteSolution(this.id)
-   				.then(function(res){
-   					console.log(res);
-   				   	location.reload();
-   				})
-   			})
+		})
+		
+		//holt sich die Lösungen unfinished
+		Api.getNodesByRef(self.data.solutions.unfinished)
+		.then( function (solutions){
+			jQuery.each(solutions.data,function () {
+				$('#selfsolutionsunfinished').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/unfinishedsolution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+			})
 		})
 		
 		//holt sich die erstellten Aufgaben
-		Api.getNodesByRef(self.data.tasks.created)
+		Api.getNodesByRef(self.data.tasks.created.finished)
 		.then( function (created){
-			jQuery.each(created,function () {
-				if(this.properties.status=="active"){
-					$('#selfcreated').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
-				}
-				if(this.properties.status=="inactive"){
-					$('#selfcreated').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:red' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
-				}
-				//$('#tac-li'+this.properties.uuid).append("<button  class=' ta-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
+			console.log(created)
+			jQuery.each(created.data,function () {
+				$('#selfcreated').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
-			
-			//toggelt die Aufgaben
-			$('.ta-delete').click(function(){
-   				Api.deleteTask(this.id)
-   				.then(function(){
-   				   	location.reload();
-   				})
-   			})
+		})
+		
+		//holt sich die erstellten Aufgaben unfinished
+		Api.getNodesByRef(self.data.tasks.created.unfinished)
+		.then( function (created){
+			jQuery.each(created.data,function () {
+				$('#selfcreatedunfinished').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/unfinishedtask"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+			})
 		})
 		
 		//holt sich die gelösten Aufgaben
 		Api.getNodesByRef(self.data.tasks.solved)
 		.then( function (solved){
-			jQuery.each(solved,function () {
+			jQuery.each(solved.data,function () {
 				$('#selfsolved').append("<li id='tas-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})

@@ -1,18 +1,30 @@
 <div class="container-fluid">
-	<select class="form-control" id="typeselect" name="Location">
-        <option value="0">Bitte Auswählen</option>
-		<option class="adminonly" value="1">Lernziel</option>
-        <option value="2">Aufgabe</option>
-        <option value="3">Info</option>
-    </select>
+
 	
-	<div class="input-group">
- 		<div id="formular"></div>
+	
+	<div>
+		<ul class='list-group'>
+			<li style='background-color:FFBF00' class='list-group-item ' >
+				<select class="form-control" id="typeselect" name="Location">
+        			<option value="0">Bitte Auswählen</option>
+					<option class="adminonly" value="1">Lernziel</option>
+        			<option value="2">Aufgabe</option>
+        			<option value="3">Info</option>
+    			</select>
+			</li>
+			<li style='background-color:FFBF00' class='list-group-item'>
+				<div id="formular"></div>
+			</li>
+			<li style='background-color:FFBF00' class='list-group-item'>
+				<button id="submit" type="button" class="btn btn-submit">Abgeben</button>
+				<button id="save" type="button" class="btn btn-submit">Speichern</button>
+			</li>
+			
+		</ul>
 	</div>
 	
 	
 	
-	<button id="submit" type="button" class="btn btn-submit">Submit</button>
 	
 	
 <div>

@@ -19,8 +19,15 @@ app.controller('AddModulController',['$scope','Api','$routeParams','$cookies', f
 	//fügt erste Ebene Lernziele/Modul hinzu
 	$('#submitModul').click(function () {
 		msg= {"name":$('#addModul').val()};
-		console.log(Api.postModul(msg,uuid));
-		window.location = 'http://maximumstock.net/sl/#/Lernziele'
+		Api.postTarget(msg,uuid)
+		.then(function(){
+			alert("Erfolg");
+			window.location = 'http://maximumstock.net/sl/#/Lernziele'
+		})
+		.catch(function(res){
+			alert(res);
+		})
+		
 	})
 
 }]);

@@ -11,6 +11,11 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	//holt sich Info uuid aus URL
 	var uuid = $routeParams.uuid;
 	
+	
+	//Bildschirmbreite
+	var editorwidth = $('.list-group-item').width();
+	$('.markupcontainer').width()*0.95
+	
 	$("#rating1").rating();
 	$("#rating2").rating();
 	$("#rating3").rating();
@@ -18,14 +23,31 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	$("#rating5").rating();
 	$("#ratingKommi").markItUp(mySettings);
 	
+	//legt Breite des Editors fest
+	$(".markitup").width(editorwidth);
+	$("textarea").width($('.markitupcontainer').width()-50);
+	
 	//fügt Bewertung hinzu
 	$('#addRating').click(function() {
-   		msg= {"r1":parseInt($('#rating1').val()),"r2":parseInt($('#rating2').val()),"r3":parseInt($('#rating3').val()),"r4":parseInt($('#rating4').val()),"r5":parseInt($('#rating5').val()),"comment":$('#ratingKommi').val()};
+   		msg= {	"values":[	parseInt($('#rating1').val()),
+   							parseInt($('#rating2').val()),
+   							parseInt($('#rating3').val()),
+   							parseInt($('#rating4').val())
+   						],
+   				"names":[	"Ist die Information (Arbeitsergebnis) verständlich ?",
+   							"Ist die Information kurz und knackig ?",
+   							"Wie finden Sie die Qualität der Quellen ?",
+   							"Empfinden Sie die Information hilfreich ?"
+   						],
+   				"comment":$('#ratingKommi').val()};
    		console.log(msg);
-   		console.log(uuid)
-		Api.postRatingOfInfo(uuid,msg)
+		Api.postRatingOfInfo(msg,uuid)
 		.then(function(res){
+			alert("Info bewertet");
 			location.reload();
+		})
+		.catch(function(res){
+			console.log(res);
 		})	
 	});
 	
@@ -33,41 +55,31 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	//holt sich die Info
 	Api.getNodesByRef('http://maximumstock.net/schwarmlernen/api/v1/infos/'+uuid)
 	.then (function(info) {
-		$('#head').append(info.properties.description);
+		console.log(info)
+		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.description+"</textarea>");
+		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.text+"</textarea>");
+		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.sources+"</textarea>");
 		
 		//holt sich die Bewertungen der Info
 		Api.getRatingOfInfo(uuid)
 		.then(function(rating){
-			jQuery.each(rating.ratings, function() {
-				$('#ratingAllList').append("<li style='background-color:FFBF00' class='list-group-item '>"+this.author+"  r1:"+this.r1+",  r2:"+this.r2+","+"  r3:"+this.r3+",  r4:"+this.r4+",  r5:"+this.r5+",  Kommentar:"+this.comment+"  </li>");
+			jQuery.each(rating.data, function() {
+				console.log(this)
+				var anzahl = this.properties.names.length;
+				$('#ratingList').append("<ul id='"+this.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul>");
+				for (var i = 0; i < anzahl; i++){
+					$("#"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+this.properties.names[i]+": <b>"+this.properties.values[i]+"</span></li>");
+				}
+				$("#"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Kommentar: <textarea readonly class='form-control'>"+this.properties.comment+"</textarea></li>");
+
 			})
+			if(isAdmin!='true'){
+				$('.adminonly').remove();
+			}
 		})
-		
-		//holt sich die Kommentare der Info
-		Api.getNodesByRef(info.links.comments)
-		.then (function(com) {
-			jQuery.each(com, function() {
-				$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+this.properties.uuid+"' >"+this.properties.comment+"</li>");
-			})
-			$('#commentList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='inputComment' type='text' class='form-control' placeholder='Kommentar' ></textarea><button  class='btn btn-default' id = 'addComment'>Add</button>");				
-			$('#addComment').click(addComment);
-			$("#inputComment").markItUp(mySettings);
+		.catch(function(res){
+			console.log(res)
+			$('#ratingList').append("<ul style='background-color:grey' class='list-group-item '>"+res.data.message+"</ul>");
 		})
-
-
-		
-   		//fügt Kommentar dazu
-    	var addComment = function (){
-				msg= {"comment":$('#inputComment').val()};
-				Api.postCommentToInfos(msg,uuid)
-				.then(function(){
-				location.reload();
-				})
-				
-		}
-
-   			
    	})
-   	
-
 }]);

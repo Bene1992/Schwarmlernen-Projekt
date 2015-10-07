@@ -8,50 +8,37 @@ app.controller('AdminPanelController',['$scope','Api','$routeParams','$cookies',
 		$('.adminonly').remove();
 	}
 	
+	var configLink;
+	var uuidConfig;
+	var uuidDegree;
+	
 	//fügt Studiengänge zu Dropdown hinzu
-	Api.getAllDegrees()
+	Api.getAllTargets()
 	.then(function(deg){
-		jQuery.each(deg,function(){
-		$('#degreeDropdown').append("<option value="+this.properties.uuid+">"+this.properties.name+"</option>");
-		
+		jQuery.each(deg.data,function(){
+			$('#degreeDropdown').append("<option value="+this.links.config+">"+this.properties.name+"</option>");
 		})
 	})
 	
-	var uuidDegree;
-	var uuidConfig;
+
 	
 	
 	//Zeigt Config Optionen an
 	var configview = function(){
-		uuidDegree=$('#degreeDropdown').val();
-		Api.getConfig(uuidDegree)
+		configLink=$('#degreeDropdown').val();
+		Api.getNodesByRef(configLink)
 		.then(function (config) {
 			console.log(config);
-			uuidConfig = config.properties.uuid;
+			uuidDegree = config.data.properties.parent;
+			uuidConfig = config.data.properties.uuid;
 			
-			$('#packagesize').val(config.properties.packageSize);
+			$('#packagesize').val(config.data.properties.packageSize);
 			
 			//%Anteil
-			$('#infoshare').val(config.properties.infoShare);
-			$('#taskshare').val(config.properties.taskShare);
-			$('#solutionshare').val(config.properties.solutionShare);
-			$('#ratingshare').val(config.properties.rateShare);
-			
-			//Kosten
-			$('#infocost').val(config.properties.infoCost);
-			$('#taskcost').val(config.properties.taskCost);
-			$('#solutioncost').val(config.properties.solutionCost);
-			$('#ratingcost').val(config.properties.rateCost);
-			
-			//Gewinn
-			$('#infopoints').val(config.properties.infoPoints);
-			$('#taskpoints').val(config.properties.taskPoints);
-			$('#solutionpoints').val(config.properties.solutionPoints);
-			$('#ratingpoints').val(config.properties.ratePoints);
-			
-			$('#ratingmulti').val(config.properties.rateMultiplier);
-			
-			
+			$('#infoshare').val(config.data.properties.infoShare);
+			$('#taskshare').val(config.data.properties.taskShare);
+			$('#solutionshare').val(config.data.properties.solutionShare);
+			$('#ratingshare').val(config.data.properties.rateShare);			
 		})
 	
 	}
@@ -61,29 +48,29 @@ app.controller('AdminPanelController',['$scope','Api','$routeParams','$cookies',
 	//erstellt Studiengang
 	$('#submitStudiengang').click(function () {
 		msg= {"name":$('#addStudiengang').val()};
-		console.log(Api.postDegree(msg));
+		Api.postMainTarget(msg)
+		.then(function(res){
+			console.log(res);
+			window.location = 'http://maximumstock.net/sl/#/Lernziele';
+		})
+		.catch(function(res){
+			alert(res);
+		})
 	})
 	
 	//ändert Studiengangconfig
 	$('#submitConfig').click(function () {
-		msg= {	"infoCost":parseInt($('#infocost').val()),
-				"infoPoints": parseInt($('#infopoints').val()),
+		msg= {	
 				"infoShare": parseInt($('#infoshare').val()),
 				"packageSize": parseInt($('#packagesize').val()),
-				"rateCost": parseInt($('#ratingcost').val()),
-				"rateMultiplier": parseInt($('#ratingmulti').val()),
-				"ratePoints": parseInt($('#ratingpoints').val()),
 				"rateShare": parseInt($('#ratingshare').val()),
-				"solutionCost": parseInt($('#solutioncost').val()),
-				"solutionPoints": parseInt($('#solutionpoints').val()),
 				"solutionShare": parseInt($('#solutionshare').val()),
-				"taskCost": parseInt($('#taskcost').val()),
-				"taskPoints": parseInt($('#taskpoints').val()),
 				"taskShare": parseInt($('#taskshare').val()),
 				"uuid": uuidConfig};
 		Api.postConfig(uuidDegree,msg)
 		.then(function(){
 			configview();
+			alert("Erfolg");
 		})
 		
 	})

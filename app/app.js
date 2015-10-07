@@ -25,12 +25,12 @@ app.config(['$routeProvider',function ($routeProvider) {
             })
         .when('/addToTask:uuid*',
             {
-                controller: 'AddToNodeController',
+                controller: 'AddToTargetController',
                 templateUrl: 'app/partials/AddToTask.html'
             })
         .when('/addToTarget:uuid*',
             {
-                controller: 'AddToNodeController',
+                controller: 'AddToTargetController',
                 templateUrl: 'app/partials/AddToTarget.html'
             })
         .when('/addToDegree:uuid*',
@@ -68,10 +68,25 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'SolutionViewController',
                 templateUrl: 'app/partials/SolutionView.html'
             })
-        .when('/alter:uuid*',
+        .when('/unfinishedinfo:uuid*',
             {
-                controller: 'AlterController',
-                templateUrl: 'app/partials/AlterView.html'
+                controller: 'InfoUnfinishedController',
+                templateUrl: 'app/partials/InfoUnfinished.html'
+            })
+        .when('/unfinishedsolution:uuid*',
+            {
+                controller: 'SolutionUnfinishedController',
+                templateUrl: 'app/partials/SolutionUnfinished.html'
+            })
+        .when('/unfinishedtask:uuid*',
+            {
+                controller: 'TaskUnfinishedController',
+                templateUrl: 'app/partials/TaskUnfinished.html'
+            })
+        .when('/config:uuid*',
+            {
+                controller: 'ConfigController',
+                templateUrl: 'app/partials/Config.html'
             })
         .when('/Admin',
             {

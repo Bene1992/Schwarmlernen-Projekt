@@ -18,9 +18,12 @@ app.controller('AddUserController',['$scope','Api','$routeParams','$cookies', fu
 			msg= {"amount":amount};
 			Api.createUser(msg,uuid)
 			.then(function (users){
-				jQuery.each(users,function () {
-					$('#userlist').append("<li style='background-color:grey' class='list-group-item' id='"+this.username+"' >Username: "+this.username+" Passwort: "+this.password+"</li>");
+				jQuery.each(users.data,function () {
+					$('#userlist').append("<li style='background-color:grey' class='list-group-item' id='"+this.username+"' ><span class='form-control'>Username: "+this.username+" Passwort: "+this.password+"</li>");
 				})
+			})
+			.catch(function(res){
+				alert(res.data.message);
 			})
 		}
 		if (amount>100){
