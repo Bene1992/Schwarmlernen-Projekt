@@ -43,7 +43,7 @@ app.controller('SolutionUnfinishedController',['$scope','Api','$routeParams','$c
 				"text":$("#text").val(),
 				"sources":$("#sources").val()
 		};
-		Api.saveSolition(uuid,msg)
+		Api.saveSolution(uuid,msg)
 		.then(function(){
 			alert("Gespeichert");
 			location.reload();

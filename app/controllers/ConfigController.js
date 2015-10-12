@@ -14,6 +14,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 			console.log(config);
 			uuidConfig = config.data.properties.uuid;
 			uuidDegree = config.data.properties.parent;
+			
 			//Kosten
 			$('#infocost').val(config.data.properties.infoCost);
 			$('#taskcost').val(config.data.properties.taskCost);
@@ -22,31 +23,42 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 			
 			//Gewinn
 			$('#infopoints').val(config.data.properties.infoPoints);
-			$('#taskpoints').val(config.data.properties.taskPoints);
-			$('#solutionpoints').val(config.data.properties.solutionPoints);
-			$('#ratingpoints').val(config.data.properties.ratePoints);
+			$('#infomaxpoints').val(config.data.properties.infoMaxPoints);
 			
-			$('#ratingmulti').val(config.data.properties.rateMultiplier);
+			$('#taskpoints').val(config.data.properties.taskPoints);
+			$('#taskmaxpoints').val(config.data.properties.taskMaxPoints);
+			
+			$('#solutionpoints').val(config.data.properties.solutionPoints);
+			$('#solutionmaxpoints').val(config.data.properties.solutionMaxPoints);
+			
+			$('#ratepoints').val(config.data.properties.ratePoints);
+		})
+		.catch(function(res){
+			console.log(res)
 		})
 	})
 
 	//ändert Studiengangconfig
 	$('#submitConfig').click(function () {
 		msg= {	
-				"rateCost": parseInt($('#ratingcost').val()),
-				"rateMultiplier": parseInt($('#ratingmulti').val()),
-				"ratePoints": parseInt($('#ratingpoints').val()),
-				"rateShare": parseInt($('#ratingshare').val()),
-				"solutionCost": parseInt($('#solutioncost').val()),
-				"solutionPoints": parseInt($('#solutionpoints').val()),
-				"solutionShare": parseInt($('#solutionshare').val()),
-				"taskCost": parseInt($('#taskcost').val()),
-				"taskPoints": parseInt($('#taskpoints').val()),
-				"taskShare": parseInt($('#taskshare').val()),
+				"rateCost": 		parseInt($('#ratingcost').val()),
+				"ratePoints": 		parseInt($('#ratepoints').val()),
+				
+				"infoCost": 		parseInt($('#infocost').val()),
+				"infoPoints":		parseInt($('#infopoints').val()),
+				"infoMaxPoints":	parseInt($('#infomaxpoints').val()),
+				
+				"solutionCost": 	parseInt($('#solutioncost').val()),
+				"solutionPoints": 	parseInt($('#solutionpoints').val()),
+				"solutionMaxPoints":parseInt($('#solutionmaxpoints').val()),
+				
+				"taskCost": 		parseInt($('#taskcost').val()),
+				"taskPoints": 		parseInt($('#taskpoints').val()),
+				"taskMaxPoints":	parseInt($('#taskmaxpoints').val()),
 				"uuid": uuidConfig};
 		Api.postConfig(uuidDegree,msg)
 		.then(function(){
-			configview();
+			window.location.reload();
 		})
 		
 	})

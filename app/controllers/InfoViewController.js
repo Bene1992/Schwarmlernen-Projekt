@@ -27,6 +27,25 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	$(".markitup").width(editorwidth);
 	$("textarea").width($('.markitupcontainer').width()-50);
 	
+	//fügt die Bewertungen der Bewertungen hinzu
+	var rateRating = function(){
+		msg= {	"values":[	parseInt($("#rate"+this.id).val())
+   						],
+   				"names":[	"War die Bewertung hilfreich"
+   						],
+   				"comment": " "};
+   		console.log(msg);
+		Api.postRatingOfRating(msg,this.id)
+		.then(function(res){
+			alert("Bewertung bewertet");
+			location.reload();
+		})
+		.catch(function(res){
+			alert("Fehler: "+res.data.message);
+		})	
+	}
+	
+	
 	//fügt Bewertung hinzu
 	$('#addRating').click(function() {
    		msg= {	"values":[	parseInt($('#rating1').val()),
@@ -60,18 +79,46 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.text+"</textarea>");
 		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.sources+"</textarea>");
 		
+		//holt meine Bewertung der Aufgabe
+		Api.getMyRatingOfInfo(uuid)
+		.then(function(rating){
+			console.log(rating)
+			$('#myratingList').append("<ul id='my"+rating.data.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul>");
+			var anzahl = rating.data.properties.names.length;
+			for (var i = 0; i < anzahl; i++){
+				$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+rating.data.properties.names[i]+": <b>"+rating.data.properties.values[i]+"</span></li>");
+			}
+			$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Kommentar: <textarea class='form-control'>"+rating.data.properties.comment+"</textarea></li>");
+			$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Bewertungen<ul id='myrate"+rating.data.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul></li>");
+			Api.getNodesByRef(rating.data.links.ratings)
+			.then(function(rate){
+				console.log(rate);
+				jQuery.each(rate.data, function(){
+					console.log(this.properties.values)
+					$("#myrate"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+this.properties.values[0]+"</span></li>");
+				})
+			})
+		})
+		.catch(function(res){
+			console.log(res)
+		})
+		
+		
 		//holt sich die Bewertungen der Info
 		Api.getRatingOfInfo(uuid)
 		.then(function(rating){
 			jQuery.each(rating.data, function() {
 				console.log(this)
 				var anzahl = this.properties.names.length;
-				$('#ratingList').append("<ul id='"+this.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul>");
+				$('#ratingList').append("<ul id='ul"+this.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul>");
 				for (var i = 0; i < anzahl; i++){
-					$("#"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+this.properties.names[i]+": <b>"+this.properties.values[i]+"</span></li>");
+					$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+this.properties.names[i]+": <b>"+this.properties.values[i]+"</span></li>");
 				}
-				$("#"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Kommentar: <textarea readonly class='form-control'>"+this.properties.comment+"</textarea></li>");
-
+				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Kommentar: <textarea class='form-control'>"+this.properties.comment+"</textarea></li>");
+				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>War die Bewertung hilfreich?<input id='rate"+this.properties.uuid+"' class='rating' data-min='0' data-max='5' data-step='1'></input></li>");
+				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item'><button  class='ratebutton btn btn-default' id = '"+this.properties.uuid+"'>Absenden</button></li>");
+				$("#rate"+this.properties.uuid).rating();
+				$(".ratebutton").click(rateRating);
 			})
 			if(isAdmin!='true'){
 				$('.adminonly').remove();
