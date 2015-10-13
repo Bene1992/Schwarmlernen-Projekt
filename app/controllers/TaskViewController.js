@@ -71,6 +71,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 	//holt Aufgaben Objekt
 	Api.getNodesByRef('http://maximumstock.net/schwarmlernen/api/v1/tasks/'+uuid)
 	.then (function(task) {
+		console.log(task)
 		$('#head').append("<textarea readonly class='form-control'>"+task.data.properties.description+"</textarea>");
 		$('#head').append("<textarea readonly class='form-control'>"+task.data.properties.text+"</textarea>");
 		$('#head').append("<textarea readonly class='form-control'>"+task.data.properties.sources+"</textarea>");
