@@ -60,7 +60,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 		Api.postConfig(uuidDegree,msg)
 		.then(function(res){
 			console.log(res);
-			window.location.reload();
+			//window.location.reload();
 		})
 		.catch(function(res){
 			console.log(res);
