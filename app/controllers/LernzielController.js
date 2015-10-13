@@ -49,7 +49,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
    		this.remove();
    		$( ".openbutton" ).off("click");
 	
-  		Api.getNodesByRef("http://maximumstock.net/schwarmlernen/api/v1/targets/"+this.id+"/children")
+  		Api.getNodesByRef("http://ns319046.ip-37-59-6.eu/schwarmlernenapi/api/v1/targets/"+this.id+"/children")
 		.then (function(children) {
 			//hängt targets an
 			console.log(children);
