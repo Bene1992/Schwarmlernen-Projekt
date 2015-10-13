@@ -71,7 +71,7 @@ app.controller('SolutionViewController',['$scope','Api','$routeParams','$cookies
 	
 	
 	//holt sich die Lösung
-	Api.getNodesByRef('http://ns319046.ip-37-59-6.eu/schwarmlernenapi/api/v1/solutions/'+uuid)
+	Api.getSolution(uuid)
 	.then (function(sol) {
 		$('#head').append("<textarea readonly class='form-control'>"+sol.data.properties.description+"</textarea>");
 		$('#head').append("<textarea readonly class='form-control'>"+sol.data.properties.text+"</textarea>");

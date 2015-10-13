@@ -72,7 +72,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	
 	
 	//holt sich die Info
-	Api.getNodesByRef('http://maximumstock.net/schwarmlernen/api/v1/infos/'+uuid)
+	Api.getInfo(uuid)
 	.then (function(info) {
 		console.log(info)
 		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.description+"</textarea>");
