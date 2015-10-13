@@ -31,8 +31,8 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
    				})
    				$(".openbutton" ).off("click");
    				$(".openbutton").click(getChildrenOnClick);
-   				$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
-   				$('.configbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
+   				$('.addbutton').click(function(){ window.location = '#/'+this.id});
+   				$('.configbutton').click(function(){ window.location = '#/'+this.id});
    				if(isAdmin=='false'){
 					$('.adminonly').remove();
 				}
