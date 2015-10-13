@@ -103,7 +103,7 @@ app.controller('AdminPanelController',['$scope','Api','$routeParams','$cookies',
 		Api.postMainTarget(msg)
 		.then(function(res){
 			console.log(res);
-			window.location = 'http://maximumstock.net/sl/#/Lernziele';
+			window.location = '#/Lernziele';
 		})
 		.catch(function(res){
 			alert(res);

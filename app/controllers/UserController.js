@@ -27,7 +27,7 @@ app.controller('UserController',['$scope','Api','$routeParams','$cookies', funct
 			})
 		
 			//leitet auf AddUser Seite weiter
-			$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
+			$('.addbutton').click(function(){ window.location = '#/'+this.id});
 		})
 	})
 }]);

@@ -16,7 +16,7 @@ app.controller('AnmeldenController',['$scope','Api','$cookies', function ($scope
 	
 		Api.saveUserToken(msg)
 		.then(function(){
-			window.location = 'http://maximumstock.net/sl/#/Lernziele'
+			window.location = '#/Lernziele'
 		})
 		
 	})

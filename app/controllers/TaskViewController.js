@@ -133,7 +133,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        	Api.getNodesByRef(task.data.links.solutions)
 		.then (function(sol) {
 			jQuery.each(sol.data, function() {
-				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+this.properties.uuid+"' ><span class='form-control'><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+this.properties.uuid+"' ><span class='form-control'><a href='#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 			$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='description' type='text' class='form-control' placeholder='Ueberschrift' ></textarea></li>");
 			$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='text' type='text' class='form-control' placeholder='Loesung' ></textarea></li>");
@@ -189,7 +189,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			Api.postSolution(msg,uuid)
 			.then(function(res){
 				alert("Im Konto gespeichert")
-				window.location = 'http://maximumstock.net/sl/#/Konto'
+				window.location = '#/Konto'
 			})
 			.catch(function(res){
 				alert("Da lief was schief"+res.data.message);

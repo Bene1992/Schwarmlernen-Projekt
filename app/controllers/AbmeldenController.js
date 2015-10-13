@@ -12,7 +12,7 @@ app.controller('AbmeldenController',['$scope','Api','$cookies', function ($scope
 	//löscht Usertoken
 	Api.deleteUserToken()
 	.then(function(){
-		window.location = 'http://maximumstock.net/sl/#/Lernziele'
+		window.location = '#/Lernziele'
 	})
 
 }]);

@@ -22,7 +22,7 @@ app.controller('AddModulController',['$scope','Api','$routeParams','$cookies', f
 		Api.postTarget(msg,uuid)
 		.then(function(){
 			alert("Erfolg");
-			window.location = 'http://maximumstock.net/sl/#/Lernziele'
+			window.location = '#/Lernziele'
 		})
 		.catch(function(res){
 			alert(res);

@@ -64,7 +64,7 @@ app.controller('TaskUnfinishedController',['$scope','Api','$routeParams','$cooki
 			Api.submitTask(uuid)
 			.then(function(){
 				alert("Abgegeben");
-				window.location = 'http://maximumstock.net/sl/#/Konto'
+				window.location = '#/Konto'
 			})
 			.catch(function(res){
 				console.log(res)

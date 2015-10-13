@@ -42,7 +42,7 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams','$cookies'
 				Api.postTarget(msg,parentID)
 				.then(function(){
 					alert("Erfolg");
-					window.location = 'http://maximumstock.net/sl/#/Lernziele'
+					window.location = '#/Lernziele'
 				})
 				.catch(function(res){
 					alert(res);
@@ -79,7 +79,7 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams','$cookies'
 				.then(function(res){
 					console.log(res);
 					alert("Im Konto gespeichert");
-					window.location = 'http://maximumstock.net/sl/#/Konto';
+					window.location = '#/Konto';
 				})
 				.catch(function(res){
 					alert("Fehler: "+res.data.message)
@@ -96,7 +96,7 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams','$cookies'
 					Api.submitTask(res.data.properties.uuid)
 					.then(function(){
 						alert("Aufgabe wurde abgegeben");
-						window.location = 'http://maximumstock.net/sl/#/Lernziele';
+						window.location = '#/Lernziele';
 					})
 					.catch(function(){
 						alert("Fehler: "+res.data.message);
@@ -136,7 +136,7 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams','$cookies'
 				Api.postInfo(msg,parentID)
 				.then(function(res){
 					alert("Im Konto gespeichert");
-					window.location = 'http://maximumstock.net/sl/#/Konto';
+					window.location = '#/Konto';
 				})
 				.catch(function(res){
 					alert("Fehler: "+res.data.message);
@@ -154,7 +154,7 @@ app.controller('AddToTargetController',['$scope','Api','$routeParams','$cookies'
 					Api.submitInfo(res.data.properties.uuid)
 					.then(function(){
 						alert("Info wurde abgegeben");
-						window.location = 'http://maximumstock.net/sl/#/Lernziele';
+						window.location = '#/Lernziele';
 					})
 					.catch(function(){
 						alert("Fehler: "+res.data.message);

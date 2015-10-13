@@ -63,11 +63,11 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
    			//Hängt tasks an 
    			jQuery.each(children.data.tasks, function() {
        			if(this.properties.status=="active"){
-       				$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a><span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       				$('#ul'+parentID).append("<li style='background-color:47BCF7' class='list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><span class='form-control' ><a href='#/task"+this.properties.uuid+"'>"+this.properties.description+"</a><span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        				$('#ta-li'+this.properties.uuid).append("<button  class='adminonly ta-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
        			}
        			if(this.properties.status=="inactive"){
-       				$('#ul'+parentID).append("<li style='background-color:red' class='adminonly list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a><span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       				$('#ul'+parentID).append("<li style='background-color:red' class='adminonly list-group-item ' id = 'ta-li"+this.properties.uuid+"' ><span class='form-control' ><a href='#/task"+this.properties.uuid+"'>"+this.properties.description+"</a><span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        				$('#ta-li'+this.properties.uuid).append("<button  class='adminonly ta-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
        			}
    			})
@@ -75,11 +75,11 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
    		 	//Hängt infos an 
    			jQuery.each(children.data.infos, function() {
        			if(this.properties.status=="active"){
-       				$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       				$('#ul'+parentID).append("<li style='background-color:81F79F' class='list-group-item ' id = 'in-li"+this.properties.uuid+"' ><span class='form-control' ><a href='#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
 					$('#in-li'+this.properties.uuid).append("<button  class='adminonly in-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
        			}
        			if(this.properties.status=="inactive"){
-       				$('#ul'+parentID).append("<li style='background-color:red' class='adminonly list-group-item ' id = 'in-li"+this.properties.uuid+"' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       				$('#ul'+parentID).append("<li style='background-color:red' class='adminonly list-group-item ' id = 'in-li"+this.properties.uuid+"' ><span class='form-control' ><a href='#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
 					$('#in-li'+this.properties.uuid).append("<button  class='adminonly in-delete btn btn-default' id = '"+this.properties.uuid+"'>Toggle</button>");
        			}
         			
@@ -91,8 +91,8 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 			$('.openbutton').off('click');
    			$('.openbutton').click(getChildrenOnClick);
    			//Leitet auf die AddTo*.hmtl weiter
-   			$('.addbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
-   			$('.configbutton').click(function(){ window.location = 'http://maximumstock.net/sl/#/'+this.id});
+   			$('.addbutton').click(function(){ window.location = '#/'+this.id});
+   			$('.configbutton').click(function(){ window.location = '#/'+this.id});
 
    			
    			//toggelt die Aufgaben   			
