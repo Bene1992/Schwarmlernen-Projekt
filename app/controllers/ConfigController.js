@@ -10,7 +10,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 	.then(function(target){
 		console.log(target);
 		console.log(target.data.links.config)
-		Api.getConfig(uuid)
+		Api.getNodesByRef(target.data.links.config)
 		.then(function(config){
 			console.log(config);
 			uuidConfig = config.data.properties.uuid;
@@ -58,7 +58,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 				"taskMaxPoints":	parseInt($('#taskmaxpoints').val()),
 			};
 		console.log(msg);
-		Api.postConfig(uuidDegree,msg)
+		Api.postConfig(uuid,msg)
 		.then(function(res){
 			console.log(res);
 			//window.location.reload();
