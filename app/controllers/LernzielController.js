@@ -26,6 +26,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 				jQuery.each(children.data.targets, function() {
       				$('#'+parentID).append("<li  class='list-group-item '  id = 'no-li"+this.properties.uuid+"' ><span class='form-control' >"+this.properties.name+"</span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        				var targetuuid = this.properties.uuid;
+       				//holt Config
        				Api.getNodesByRef(this.links.config)
        				.then(function(config){
        					console.log(config);
@@ -61,6 +62,13 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 			console.log(children);
 			jQuery.each(children.data.targets, function() {
        			$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item ' id = 'no-li"+this.properties.uuid+"' ><span class='form-control' >"+this.properties.name+"</span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
+       			var targetuuid = this.properties.uuid;
+       			//holt Config
+       			Api.getNodesByRef(this.links.config)
+       			.then(function(config){
+       				console.log(config);
+       				$('#no-li'+targetuuid).append("<span class='form-control' >Infos Max: "+config.data.properties.infoMaxPoints+" Aufgaben Max: "+config.data.properties.taskMaxPoints+" Bewertungen: "+config.data.properties.ratePoints+"</span>");
+       			})
        			$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Aufklappen</button>");
        			$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Objekt hinzufuegen</button>");
        			$('#no-li'+this.properties.uuid).append("<button  class='adminonly configbutton btn btn-default' id='config"+this.properties.uuid+"'>Konfigurieren</button>");
