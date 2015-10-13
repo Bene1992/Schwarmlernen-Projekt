@@ -33,7 +33,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	}
 	
 	this.getInfo= function(uuid){
-		return $http.get(url+'/v1/infos/'+uuid)
+		return $http.get(url+'/infos/'+uuid)
 	}
 	
 	this.getSolution= function(uuid){
@@ -49,7 +49,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	}
 	
 	this.saveSolution= function(uuid,msg){
-		return $http.put('url+/solutions/'+uuid,msg)
+		return $http.put(url+'/solutions/'+uuid,msg)
 	}
 	
 	this.submitTask= function(uuid){
