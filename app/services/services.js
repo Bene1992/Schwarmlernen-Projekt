@@ -110,6 +110,11 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 		return $http.put(url+'/targets/'+uuid+'/config',msg)
 	}
 	
+	this.getConfig=  function(uuid){
+		console.log(url+'/targets/'+uuid+'/config')
+		return $http.get(url+'/targets/'+uuid+'/config')
+	}
+	
 	this.postGlobalConfig=  function(uuid,msg){
 		return $http.put(url+'/targets/'+uuid+'/globalconfig',msg)
 	}

@@ -10,7 +10,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 	.then(function(target){
 		console.log(target);
 		console.log(target.data.links.config)
-		Api.getNodesByRef(target.data.links.config)
+		Api.getConfig(uuid)
 		.then(function(config){
 			console.log(config);
 			uuidConfig = config.data.properties.uuid;
