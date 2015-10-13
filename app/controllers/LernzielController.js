@@ -29,7 +29,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
        				Api.getNodesByRef(this.links.config)
        				.then(function(config){
        					console.log(config);
-       					$('#no-li'+targetuuid).append("<span class='form-control' >"+config.data.properties.infoPoints+"</span>");
+       					$('#no-li'+targetuuid).append("<span class='form-control' >Infos Max: "+config.data.properties.infoMaxPoints+" Aufgaben Max: "+config.data.properties.taskMaxPoints+" Bewertungen: "+config.data.properties.ratePoints+"</span>");
        				})
        				$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Aufklappen</button>");
        				$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Objekt hinzufuegen</button>");
