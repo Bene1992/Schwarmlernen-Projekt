@@ -17,7 +17,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 		console.log(mainTargets);
 		jQuery.each(mainTargets.data, function() {
 			$('#root').append("<li id = 'de-li"+this.properties.uuid+"' class='list-group-item' ><span class='form-control' >"+this.properties.name+"</span></li><ul id = '"+this.properties.uuid+"'></ul>");
-			$('#de-li'+this.properties.uuid).append("<button  class='adminonly addbutton btn btn-default' id = 'addToDegree"+this.properties.uuid+"'>Hinzufügen</button>");
+			$('#de-li'+this.properties.uuid).append("<button  class='adminonly addbutton btn btn-default' id = 'addToDegree"+this.properties.uuid+"'>Hinzufuegen</button>");
 			var parentID = this.properties.uuid;
 			
 			Api.getNodesByRef(this.links.children)
@@ -56,7 +56,7 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
 			jQuery.each(children.data.targets, function() {
        			$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item ' id = 'no-li"+this.properties.uuid+"' ><span class='form-control' >"+this.properties.name+"</span></li><ul id = 'ul"+this.properties.uuid+"'></ul>");
        			$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Aufklappen</button>");
-       			$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Hinzufügen</button>");
+       			$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Hinzufuegen</button>");
        			$('#no-li'+this.properties.uuid).append("<button  class='adminonly configbutton btn btn-default' id='config"+this.properties.uuid+"'>Konfigurieren</button>");
    			})
    		
