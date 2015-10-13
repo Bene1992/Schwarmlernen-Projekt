@@ -18,7 +18,7 @@ app.factory('httpRequestInterceptor',['$cookies', function ($cookies) {
 
 app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	
-	var url = 'http://ns319046.ip-37-59-6.eu/schwarmlernenapi/api/v1 '
+	var url = 'http://ns319046.ip-37-59-6.eu/schwarmlernenapi/api/v1'
 
 	this.getAllTargets=  function(){
 		return $http.get(url+'/targets')
