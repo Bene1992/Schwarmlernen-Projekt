@@ -18,77 +18,77 @@ app.config(['$routeProvider',function ($routeProvider) {
                 controller: 'KontoController',
                 templateUrl: 'app/partials/Konto.html'
             })
-        .when('/Abmelden',
+        .when('/#/Abmelden',
             {
                 controller: 'AbmeldenController',
                 templateUrl: 'app/partials/Abmelden.html'
             })
-        .when('/addToTask:uuid*',
+        .when('/#/addToTask:uuid*',
             {
                 controller: 'AddToTargetController',
                 templateUrl: 'app/partials/AddToTask.html'
             })
-        .when('/addToTarget:uuid*',
+        .when('/#/addToTarget:uuid*',
             {
                 controller: 'AddToTargetController',
                 templateUrl: 'app/partials/AddToTarget.html'
             })
-        .when('/addToDegree:uuid*',
+        .when('/#/addToDegree:uuid*',
             {
                 controller: 'AddModulController',
                 templateUrl: 'app/partials/AddModul.html'
             })
-        .when('/createUserFor:uuid*',
+        .when('/#/createUserFor:uuid*',
             {
                 controller: 'AddUserController',
                 templateUrl: 'app/partials/AddUser.html'
             })
-        .when('/User',
+        .when('/#/User',
             {
                 controller: 'UserController',
                 templateUrl: 'app/partials/User.html'
             })
-        .when('/Login',
+        .when('/#/Login',
             {
                 controller: 'AnmeldenController',
                 templateUrl: 'app/partials/Anmelden.html'
             })
-       	.when('/task:uuid*',
+       	.when('/#/task:uuid*',
             {
                 controller: 'TaskViewController',
                 templateUrl: 'app/partials/TaskView.html'
             })
-        .when('/info:uuid*',
+        .when('/#/info:uuid*',
             {
                 controller: 'InfoViewController',
                 templateUrl: 'app/partials/InfoView.html'
             })
-        .when('/solution:uuid*',
+        .when('/#/solution:uuid*',
             {
                 controller: 'SolutionViewController',
                 templateUrl: 'app/partials/SolutionView.html'
             })
-        .when('/unfinishedinfo:uuid*',
+        .when('/#/unfinishedinfo:uuid*',
             {
                 controller: 'InfoUnfinishedController',
                 templateUrl: 'app/partials/InfoUnfinished.html'
             })
-        .when('/unfinishedsolution:uuid*',
+        .when('/#/unfinishedsolution:uuid*',
             {
                 controller: 'SolutionUnfinishedController',
                 templateUrl: 'app/partials/SolutionUnfinished.html'
             })
-        .when('/unfinishedtask:uuid*',
+        .when('/#/unfinishedtask:uuid*',
             {
                 controller: 'TaskUnfinishedController',
                 templateUrl: 'app/partials/TaskUnfinished.html'
             })
-        .when('/config:uuid*',
+        .when('/#/config:uuid*',
             {
                 controller: 'ConfigController',
                 templateUrl: 'app/partials/Config.html'
             })
-        .when('/Admin',
+        .when('/#/Admin',
             {
                 controller: 'AdminPanelController',
                 templateUrl: 'app/partials/AdminPanel.html'
