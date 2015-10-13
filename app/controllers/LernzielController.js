@@ -28,6 +28,10 @@ app.controller('LernzielController',['$scope','Api','$cookies', function ($scope
        				$('#no-li'+this.properties.uuid).append("<button  class='openbutton btn btn-default' id = '"+this.properties.uuid+"'>Aufklappen</button>");
        				$('#no-li'+this.properties.uuid).append("<button  class='addbutton btn btn-default' id = 'addToTarget"+this.properties.uuid+"'>Objekt hinzufuegen</button>");
        				$('#no-li'+this.properties.uuid).append("<button  class='adminonly configbutton btn btn-default' id='config"+this.properties.uuid+"'>Konfigurieren</button>");
+       				Api.getNodesByRef(this.links.config)
+       				.then(function(res){
+       					console.log(res);
+       				})
    				})
    				$(".openbutton" ).off("click");
    				$(".openbutton").click(getChildrenOnClick);
