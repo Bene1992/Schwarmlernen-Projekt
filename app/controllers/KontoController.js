@@ -49,7 +49,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		Api.getNodesByRef(self.data.infos.finished)
 		.then( function (infos){
 			jQuery.each(infos.data,function () {
-				$('#selfinfos').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfinfos').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/info"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 		
@@ -57,7 +57,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		Api.getNodesByRef(self.data.infos.unfinished)
 		.then( function (infos){
 			jQuery.each(infos.data,function () {
-				$('#selfinfosunfinished').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/unfinishedinfo"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfinfosunfinished').append("<li id='in-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/unfinishedinfo"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 		
@@ -65,7 +65,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		Api.getNodesByRef(self.data.solutions.finished)
 		.then( function (solutions){
 			jQuery.each(solutions.data,function () {
-				$('#selfsolutions').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfsolutions').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/solution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 		
@@ -73,7 +73,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		Api.getNodesByRef(self.data.solutions.unfinished)
 		.then( function (solutions){
 			jQuery.each(solutions.data,function () {
-				$('#selfsolutionsunfinished').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/unfinishedsolution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfsolutionsunfinished').append("<li id='so-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/unfinishedsolution"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 		
@@ -82,7 +82,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		.then( function (created){
 			console.log(created)
 			jQuery.each(created.data,function () {
-				$('#selfcreated').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfcreated').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 		
@@ -90,7 +90,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		Api.getNodesByRef(self.data.tasks.created.unfinished)
 		.then( function (created){
 			jQuery.each(created.data,function () {
-				$('#selfcreatedunfinished').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/unfinishedtask"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfcreatedunfinished').append("<li id='tac-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/unfinishedtask"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 		
@@ -98,7 +98,7 @@ app.controller('KontoController',['$scope','Api','$routeParams','$cookies', func
 		Api.getNodesByRef(self.data.tasks.solved)
 		.then( function (solved){
 			jQuery.each(solved.data,function () {
-				$('#selfsolved').append("<li id='tas-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='/sl/#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
+				$('#selfsolved').append("<li id='tas-li"+this.properties.uuid+"' style='background-color:grey' class='list-group-item' ><span class='form-control' ><a href='#/task"+this.properties.uuid+"'>"+this.properties.description+"</a></span></li>");
 			})
 		})
 	})
