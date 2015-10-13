@@ -57,6 +57,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 				"taskPoints": 		parseInt($('#taskpoints').val()),
 				"taskMaxPoints":	parseInt($('#taskmaxpoints').val()),
 			};
+		console.log(msg)
 		Api.postConfig(uuidDegree,msg)
 		.then(function(res){
 			console.log(res);
