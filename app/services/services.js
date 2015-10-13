@@ -106,6 +106,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 	}
 	
 	this.postConfig=  function(uuid,msg){
+		console.log(url+'/targets/'+uuid+'/config')
 		return $http.put(url+'/targets/'+uuid+'/config',msg)
 	}
 	
