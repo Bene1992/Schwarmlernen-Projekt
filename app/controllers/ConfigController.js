@@ -61,7 +61,19 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 		Api.postConfig(uuid,msg)
 		.then(function(res){
 			console.log(res);
-			//window.location.reload();
+			window.location.reload();
+		})
+		.catch(function(res){
+			console.log(res);
+		})
+		
+	})
+	
+		$('#deleteConfig').click(function () {
+		Api.deleteConfig(uuid)
+		.then(function(res){
+			console.log(res);
+			window.location.reload();
 		})
 		.catch(function(res){
 			console.log(res);

@@ -109,6 +109,10 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
 		return $http.put(url+'/targets/'+uuid+'/config',msg)
 	}
 	
+	this.deleteConfig=  function(uuid){
+		return $http.delete(url+'/targets/'+uuid+'/config')
+	}
+	
 	
 	this.postGlobalConfig=  function(uuid,msg){
 		return $http.put(url+'/targets/'+uuid+'/globalconfig',msg)
