@@ -63,7 +63,7 @@ app.controller('ConfigController',['$scope','Api','$routeParams','$cookies', fun
 			window.location.reload();
 		})
 		.catch(function(res){
-			console.log(res)
+			console.log(res);
 		})
 		
 	})

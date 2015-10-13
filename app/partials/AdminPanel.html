@@ -3,13 +3,15 @@
 	<div id="SolutionView"> </div>
 
 	
-	<div id="Studiengang" class="adminonly">Einen Studiengang hinzufügen
+	<div id="Studiengang" class="adminonly">
+		Einen Studiengang hinzufügen:<br>
+		Geben sie den Namen des Studiengangs ein und bestätigen Sie diesen.
 		<ul class='list-group'>
 			<li style='background-color:FFBF00' class='list-group-item ' >
 				<input id="addStudiengang" class='form-control' placeholder="Name"></input>
 			</li>
 			<li style='background-color:FFBF00' class='list-group-item ' >
-				<button id="submitStudiengang" class="btn btn-default">Submit</input>
+				<button id="submitStudiengang" class="btn btn-default">Bestätigen</input>
 			</li>
 		</ul>
 	</div>
@@ -19,26 +21,26 @@
 			<option>Bitte Wählen</option>
 		</select>
 		<ul id='degreeConfig' class='list-group'>
-			<li style='background-color:FFBF00' class='list-group-item ' >Packetgroesse<input id='packagesize' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Paketgröße<br>Wie groß soll das Paket ingesamt werden ?<input id='packagesize' class='form-control'></input></li>
 		
-			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Infos<input id='infoshare' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Aufgaben<input id='taskshare' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Loesungen<input id='solutionshare' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Bewerten<input id='ratingshare' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Infos<br>Wieviel Prozent an Infos soll das Paket enthalten ?<input id='infoshare' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Aufgaben<br>Wieviele Prozent an Aufgaben soll das Paket enthalten ?<input id='taskshare' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Loesungen<br>Wieviele Prozent an Loesungen soll das Paket enthalten ?<input id='solutionshare' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Anteil Bewertungen<br>Wieviele Prozent an Bewertungen soll das Paket enthalten ?<input id='ratingshare' class='form-control'></input></li>
 			
-			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Infos<input id='infocost' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Aufgaben<input id='taskcost' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Loesungen<input id='solutioncost' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Bewerten<input id='ratingcost' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Infos<br>Wie viele Punkte soll das Einstellen von Infos Kosten ?<input id='infocost' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Aufgaben<br>Wie viele Punkte soll das Einstellen von Aufgaben Kosten ?<input id='taskcost' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Loesungen<br>Wie viele Punkte soll das Einstellen von Loesungen Kosten ?<input id='solutioncost' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Kosten Bewertungen<br>Wie viele Punkte soll das Einstellen von Bewertungen Kosten ?<input id='ratingcost' class='form-control'></input></li>
 			
 			<li style='background-color:FFBF00' class='list-group-item ' >Punkte fürs Einstellen von Infos<input id='infopoints' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Punkte maximal Infos<input id='infomaxpoints' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Punkte maximal erreichbar bei einer durchschnittlichen Bewertungen von 5/5 Sternen Infos<input id='infomaxpoints' class='form-control'></input></li>
 			<li style='background-color:FFBF00' class='list-group-item ' >Punkte fürs Einstellen von  Aufgaben<input id='taskpoints' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Punkte maximal Aufgaben<input id='taskmaxpoints' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Punkte maximal erreichbar bei einer durchschnittlichen Bewertungen von 5/5 Sternen Aufgaben<input id='taskmaxpoints' class='form-control'></input></li>
 			<li style='background-color:FFBF00' class='list-group-item ' >Punkte fürs Einstellen von  Loesungen<input id='solutionpoints' class='form-control'></input></li>
-			<li style='background-color:FFBF00' class='list-group-item ' >Punkte maximal Loesungen<input id='solutionmaxpoints' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Punkte maximal erreichbar bei einer durchschnittlichen Bewertungen von 5/5 Sternen Loesungen<input id='solutionmaxpoints' class='form-control'></input></li>
 			
-			<li style='background-color:FFBF00' class='list-group-item ' >Punkte fürs Einstellen von  Bewerten<input id='ratepoints' class='form-control'></input></li>
+			<li style='background-color:FFBF00' class='list-group-item ' >Punkte fürs Einstellen von Bewertungen<input id='ratepoints' class='form-control'></input></li>
 
 			<li style='background-color:FFBF00' class='list-group-item ' ><button id='submitConfig' class='btn btn-default'>Submit</input></li>
 		</ul>
