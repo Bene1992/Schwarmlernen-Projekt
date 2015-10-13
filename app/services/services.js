@@ -184,6 +184,7 @@ app.service('Api', ['$http','$cookies', function($http,$cookies) {
   	this.deleteUserToken= function(){ 
 		$cookies.remove('X-Access-Token');
 		$cookies.remove('isAdmin');
+		window.location = '#/Lernziele'
   	}
   	
 }]);

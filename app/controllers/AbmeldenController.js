@@ -10,9 +10,6 @@ app.controller('AbmeldenController',['$scope','Api','$cookies', function ($scope
 	}
 
 	//löscht Usertoken
-	Api.deleteUserToken()
-	.then(function(){
-		window.location = '#/Lernziele'
-	})
+	Api.deleteUserToken();
 
 }]);
