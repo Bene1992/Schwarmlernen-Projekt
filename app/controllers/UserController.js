@@ -22,7 +22,7 @@ app.controller('UserController',['$scope','Api','$routeParams','$cookies', funct
 				jQuery.each(user.data,function () {
 					if(this.properties.lastLogin){
 						console.log(this)
-						var lastLogin = moment(this.properties.lastLogin);
+						var lastLogin = moment(this.properties.lastLogin,"YYYYMMDD");
 						console.log(lastLogin);
 					}
 					//User darstellen
