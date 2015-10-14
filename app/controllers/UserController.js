@@ -21,8 +21,8 @@ app.controller('UserController',['$scope','Api','$routeParams','$cookies', funct
 			.then(function (user){
 				jQuery.each(user.data,function () {
 					console.log(this)
-					var lastLogin = null;
-					lastLogin = moment(this.properties.createdAt).startOf('day').fromNow();
+					
+					var lastLogin = moment(this.properties.createdAt).startOf('day').fromNow();
 					console.log(lastLogin);
 					//User darstellen
 					$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item id='"+this.properties.uuid+"' ><span class='form-control'>"+this.properties.username+"</span></li>");
