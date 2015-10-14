@@ -22,7 +22,7 @@ app.controller('UserController',['$scope','Api','$routeParams','$cookies', funct
 				jQuery.each(user.data,function () {
 					console.log(this)
 					
-					var lastLogin = moment(this.properties.lastLogin, "YYYYMMDD").fromNow();
+					var lastLogin = moment(this.properties.lastLogin).startOf('day').fromNow();
 					console.log(lastLogin);
 					//User darstellen
 					$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item id='"+this.properties.uuid+"' ><span class='form-control'>"+this.properties.username+"</span></li>");
