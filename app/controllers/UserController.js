@@ -23,6 +23,7 @@ app.controller('UserController',['$scope','Api','$routeParams','$cookies', funct
 					console.log(this)
 					
 					var lastLogin = moment(this.properties.lastLogin, "YYYYMMDD").fromNow();
+					console.log(lastLogin);
 					//User darstellen
 					$('#ul'+parentID).append("<li style='background-color:grey' class='list-group-item id='"+this.properties.uuid+"' ><span class='form-control'>"+this.properties.username+"</span></li>");
 				})
