@@ -127,7 +127,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        	
        	Api.getNodesByRef(task.data.links.solution)
        	.then(function(sol){
-       		$('#mysolutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+sol.data.properties.uuid+"' ><span class='form-control'><a href='/sl/#/solution"+sol.data.properties.uuid+"'>"+sol.data.properties.description+"</a></span></li>");
+       		$('#mysolutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+sol.data.properties.uuid+"' ><span class='form-control'><a href='#/solution"+sol.data.properties.uuid+"'>"+sol.data.properties.description+"</a></span></li>");
        	})	
        	
        	//holt Lösungen
