@@ -136,13 +136,12 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        	.then(function(sol){
        		$('#mysolutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+sol.data.properties.uuid+"' ><span class='form-control'><a href='#/solution"+sol.data.properties.uuid+"'>"+sol.data.properties.description+"</a></span></li>");
        	})
-       	$('#choseSol').click(solAbgeben);
-       	var solAbgeben = function(){
-				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='description' type='text' class='form-control' placeholder='Ueberschrift' ></textarea></li>");
-				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='text' type='text' class='form-control' placeholder='Loesung' ></textarea></li>");
-				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='sources' type='text' class='form-control' placeholder='Quellen' ></textarea></li>");
+       	$('#choseSol').click(function(){
+				$('#solForm').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='description' type='text' class='form-control' placeholder='Ueberschrift' ></textarea></li>");
+				$('#solForm').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='text' type='text' class='form-control' placeholder='Loesung' ></textarea></li>");
+				$('#solForm').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='sources' type='text' class='form-control' placeholder='Quellen' ></textarea></li>");
 
-				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><button  class='btn btn-default' id = 'addSolution'>Abgeben</button><button  class='btn btn-default' id = 'saveSolution'>Speichern</button></li>");
+				$('#solForm').append("<li style='background-color:FFBF00' class='list-group-item ' ><button  class='btn btn-default' id = 'addSolution'>Abgeben</button><button  class='btn btn-default' id = 'saveSolution'>Speichern</button></li>");
 				
 				$('#addSolution').click(addSolution);
 				$('#saveSolution').click(saveSolution);
@@ -154,7 +153,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 				//legt Breite des Editors fest
 				$(".markitup").width(editorwidth);
 				$("textarea").width($('.markitupcontainer').width()-50);       	
-       	}	
+       	})
        	
        	//holt Lösungen
        	Api.getNodesByRef(task.data.links.solutions)
