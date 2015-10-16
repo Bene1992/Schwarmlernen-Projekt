@@ -77,9 +77,9 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 		$('#head').append("<div style='height:auto' class='form-control'>"+task.data.properties.sources+"</div>");
 		
 		//holt sich Lernziel
-		Api.getNodesByRef(task.data.links.parent)
-		.then(function(parent){
-			console.log(parent);
+		Api.getNodesByRef(task.data.links.target)
+		.then(function(target){
+			console.log(target);
 		})
 		
 		
