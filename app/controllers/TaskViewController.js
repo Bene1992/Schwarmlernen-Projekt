@@ -72,9 +72,9 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 	Api.getTask(uuid)
 	.then (function(task) {
 		console.log(task)
-		$('#head').append("<div class='form-control'>"+task.data.properties.description+"</div>");
-		$('#head').append("<div class='form-control'>"+task.data.properties.text+"</div>");
-		$('#head').append("<div class='form-control'>"+task.data.properties.sources+"</div>");
+		$('#head').append("<textarea class='form-control'>"+task.data.properties.description+"</textarea>");
+		$('#head').append("<textarea class='form-control'>"+task.data.properties.text+"</textarea>");
+		$('#head').append("<textarea class='form-control'>"+task.data.properties.sources+"</textarea>");
 		
 		
 		//holt meine Bewertung der Aufgabe
