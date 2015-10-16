@@ -138,7 +138,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        	})
        	
        	$('#choseRate').click(function(){
-       		$('#actualRating').css("visibility: visible;");
+       		$('#actualRating').show("fast");
        	})
        	
        	//Formular zum hinzufügen von Lösungen
