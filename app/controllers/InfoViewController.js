@@ -75,9 +75,9 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 	Api.getInfo(uuid)
 	.then (function(info) {
 		console.log(info)
-		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.description+"</textarea>");
-		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.text+"</textarea>");
-		$('#head').append("<textarea readonly class='form-control'>"+info.data.properties.sources+"</textarea>");
+		$('#head').append("<div style='height:auto' readonly class='form-control'>"+info.data.properties.description+"</div>");
+		$('#head').append("<div style='height:auto' readonly class='form-control'>"+info.data.properties.text+"</div>");
+		$('#head').append("<div style='height:auto' readonly class='form-control'>"+info.data.properties.sources+"</div>");
 		
 		//holt meine Bewertung der Aufgabe
 		Api.getMyRatingOfInfo(uuid)

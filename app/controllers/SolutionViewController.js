@@ -73,9 +73,9 @@ app.controller('SolutionViewController',['$scope','Api','$routeParams','$cookies
 	//holt sich die Lösung
 	Api.getSolution(uuid)
 	.then (function(sol) {
-		$('#head').append("<textarea readonly class='form-control'>"+sol.data.properties.description+"</textarea>");
-		$('#head').append("<textarea readonly class='form-control'>"+sol.data.properties.text+"</textarea>");
-		$('#head').append("<textarea readonly class='form-control'>"+sol.data.properties.sources+"</textarea>");	
+		$('#head').append("<div style='height:auto' class='form-control'>"+sol.data.properties.description+"</div>");
+		$('#head').append("<div style='height:auto' class='form-control'>"+sol.data.properties.text+"</div>");
+		$('#head').append("<div style='height:auto' class='form-control'>"+sol.data.properties.sources+"</div>");	
 		
 		//holt meine Bewertung der Lösung
 		Api.getMyRatingOfSolution(uuid)
