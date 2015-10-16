@@ -137,6 +137,10 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        		$('#mysolutionList').append("<li style='background-color:FFBF00' class='list-group-item ' id = '"+sol.data.properties.uuid+"' ><span class='form-control'><a href='#/solution"+sol.data.properties.uuid+"'>"+sol.data.properties.description+"</a></span></li>");
        	})
        	
+       	$('#choseRate').click(function(){
+       		$('#actualRating').css("visibility: visible;");
+       	})
+       	
        	//Formular zum hinzufügen von Lösungen
        	$('#choseSol').click(function(){
 			$('#solForm').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='description' type='text' class='form-control' placeholder='Ueberschrift' ></textarea></li>");
