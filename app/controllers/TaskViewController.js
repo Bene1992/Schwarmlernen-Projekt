@@ -139,6 +139,9 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        	
        	$('#choseRate').click(function(){
        		$('#actualRating').show("fast");
+       		//legt Breite des Editors fest
+			$(".markitup").width(editorwidth);
+			$("textarea").width($('.markitupcontainer').width()-50);
        	})
        	
        	//Formular zum hinzufügen von Lösungen
