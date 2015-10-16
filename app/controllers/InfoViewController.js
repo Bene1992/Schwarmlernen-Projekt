@@ -89,7 +89,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 				$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+rating.data.properties.names[i]+": <b>"+rating.data.properties.values[i]+"</span></li>");
 			}
 			$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Kommentar: <textarea class='form-control'>"+rating.data.properties.comment+"</textarea></li>");
-			$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Bewertungen<ul id='myrate"+rating.data.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul></li>");
+			$("#my"+rating.data.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Qualitätskontrolle<ul id='myrate"+rating.data.properties.uuid+"' style='background-color:grey' class='list-group-item '></ul></li>");
 			Api.getNodesByRef(rating.data.links.ratings)
 			.then(function(rate){
 				console.log(rate);
@@ -115,7 +115,7 @@ app.controller('InfoViewController',['$scope','Api','$routeParams','$cookies', f
 					$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '><span class='form-control'>"+this.properties.names[i]+": <b>"+this.properties.values[i]+"</span></li>");
 				}
 				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Kommentar: <textarea class='form-control'>"+this.properties.comment+"</textarea></li>");
-				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>War die Bewertung hilfreich?<input id='rate"+this.properties.uuid+"' class='rating' data-min='0' data-max='5' data-step='1'></input></li>");
+				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item '>Erfüllt die Bewertung die geforderten Kriterien?<input id='rate"+this.properties.uuid+"' class='rating' data-min='0' data-max='5' data-step='1'></input></li>");
 				$("#ul"+this.properties.uuid).append("<li style='background-color:FFBF00' class='list-group-item'><button  class='ratebutton btn btn-default' id = '"+this.properties.uuid+"'>Absenden</button></li>");
 				$("#rate"+this.properties.uuid).rating();
 				$(".ratebutton").click(rateRating);
