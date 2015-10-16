@@ -138,8 +138,6 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
        	})
        	$('#choseSol').click(solAbgeben);
        	var solAbgeben = function(){
-       		Api.getNodesByRef(task.data.links.solutions)
-			.then (function(sol) {
 				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='description' type='text' class='form-control' placeholder='Ueberschrift' ></textarea></li>");
 				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='text' type='text' class='form-control' placeholder='Loesung' ></textarea></li>");
 				$('#solutionList').append("<li style='background-color:FFBF00' class='list-group-item ' ><textarea  id='sources' type='text' class='form-control' placeholder='Quellen' ></textarea></li>");
@@ -155,8 +153,7 @@ app.controller('TaskViewController',['$scope','Api','$routeParams','$cookies', f
 			
 				//legt Breite des Editors fest
 				$(".markitup").width(editorwidth);
-				$("textarea").width($('.markitupcontainer').width()-50);
-       	
+				$("textarea").width($('.markitupcontainer').width()-50);       	
        	}	
        	
        	//holt Lösungen
